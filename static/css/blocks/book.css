@@ -1,0 +1,222 @@
+.book__layout {
+    display: grid;
+    grid-template-columns: 300px 1fr 280px;
+    gap: 40px;
+    align-items: start;
+    margin-bottom: 72px;
+}
+
+.book__cover {
+    position: sticky;
+    top: 116px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 28px;
+    background: var(--surface-dark);
+    border-radius: 16px;
+}
+
+.book__image {
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: var(--shadow-big);
+}
+
+.book__badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
+
+.book__title {
+    font-family: var(--font-title);
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--navy);
+    margin-bottom: 8px;
+}
+
+.book__author {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--gold-dark);
+}
+
+.book__author:hover {
+    text-decoration: underline;
+}
+
+.book__rating {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 16px 0 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+}
+
+.book__stars {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.book__stars .icon {
+    width: 18px;
+    height: 18px;
+    color: var(--gold);
+    fill: var(--gold);
+}
+
+.book__reviews-link {
+    color: var(--muted);
+    border-bottom: 1px dashed var(--muted);
+}
+
+.book__description p {
+    margin-bottom: 14px;
+}
+
+.book__params {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 32px;
+}
+
+.book__param {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+}
+
+.book__param-name {
+    color: var(--muted);
+}
+
+.book__param-value {
+    font-weight: 600;
+    text-align: right;
+}
+
+.book__buy {
+    position: sticky;
+    top: 116px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+.book__prices {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.book__price {
+    font-family: var(--font-title);
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.book__old {
+    color: var(--muted);
+    text-decoration: line-through;
+}
+
+.book__stock {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--green);
+}
+
+.book__stock_out {
+    color: var(--red);
+}
+
+.book__favorite_active {
+    border-color: var(--red);
+    color: var(--red);
+}
+
+.book__notes {
+    margin-top: 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.book__note {
+    padding-left: 16px;
+    position: relative;
+}
+
+.book__note::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+}
+
+.book__similar {
+    margin-top: 72px;
+}
+
+@media (max-width: 1080px) {
+    .book__layout {
+        grid-template-columns: 240px 1fr;
+    }
+
+    .book__buy {
+        grid-column: 1 / 3;
+        position: static;
+    }
+}
+
+@media (max-width: 760px) {
+    .book__layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .book__cover {
+        position: static;
+    }
+
+    .book__image {
+        max-width: 220px;
+    }
+
+    .book__buy {
+        grid-column: auto;
+    }
+
+    .book__title {
+        font-size: 28px;
+    }
+
+    .book__params {
+        grid-template-columns: 1fr;
+    }
+}

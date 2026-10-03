@@ -1,0 +1,45 @@
+{% extends 'panel/base.html' %}
+
+{% block content %}
+<div class="panel__head">
+    <div>
+        <span class="section__label">Книги</span>
+        <h1 class="panel__title">{{ title }}</h1>
+    </div>
+    <a class="button button_outline" href="{% url 'panel_books' %}">Назад к списку</a>
+</div>
+
+<form class="form panel__form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% include 'includes/field.html' with field=form.title %}
+    <div class="form__row">
+        {% include 'includes/field.html' with field=form.author %}
+        {% include 'includes/field.html' with field=form.genre %}
+    </div>
+    {% include 'includes/field.html' with field=form.description %}
+    <div class="form__row form__row_image">
+        <img class="form__preview {% if not book.image %}form__preview_hidden{% endif %}" id="preview" src="{% if book.image %}{{ book.image.url }}{% endif %}" alt="">
+        {% include 'includes/field.html' with field=form.image %}
+    </div>
+    <div class="form__row form__row_three">
+        {% include 'includes/field.html' with field=form.price %}
+        {% include 'includes/field.html' with field=form.old_price %}
+        {% include 'includes/field.html' with field=form.stock %}
+    </div>
+    <div class="form__row form__row_three">
+        {% include 'includes/field.html' with field=form.publisher %}
+        {% include 'includes/field.html' with field=form.year %}
+        {% include 'includes/field.html' with field=form.pages %}
+    </div>
+    <div class="form__row form__row_three">
+        {% include 'includes/field.html' with field=form.isbn %}
+        {% include 'includes/field.html' with field=form.cover %}
+        {% include 'includes/field.html' with field=form.age %}
+    </div>
+    <div class="form__checks">
+        <label class="form__check">{{ form.is_new }} Новинка</label>
+        <label class="form__check">{{ form.is_bestseller }} Бестселлер</label>
+    </div>
+    <button class="button" type="submit">Сохранить</button>
+</form>
+{% endblock %}

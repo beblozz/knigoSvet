@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход — КнигоСвет{% endblock %}
+
+{% block content %}
+<section class="section section_top auth">
+    <div class="container auth__inner">
+        <form class="form auth__form" method="post">
+            {% csrf_token %}
+            <span class="section__label">Личный кабинет</span>
+            <h1 class="form__title">Вход</h1>
+            {% for error in form.non_field_errors %}
+                <span class="form__error">{{ error }}</span>
+            {% endfor %}
+            {% include 'includes/field.html' with field=form.username %}
+            {% include 'includes/field.html' with field=form.password %}
+            <input type="hidden" name="next" value="{{ next }}">
+            <button class="button button_wide" type="submit">Войти</button>
+            <p class="form__hint">Ещё нет аккаунта? <a class="form__link" href="{% url 'register' %}">Зарегистрироваться</a></p>
+        </form>
+    </div>
+</section>
+{% endblock %}

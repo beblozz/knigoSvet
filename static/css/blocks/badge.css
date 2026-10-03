@@ -1,0 +1,46 @@
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: 100px;
+    background: var(--surface-dark);
+    color: var(--navy);
+    white-space: nowrap;
+}
+
+.badge_new {
+    background: var(--navy);
+    color: var(--white);
+}
+
+.badge_sale {
+    background: var(--red);
+    color: var(--white);
+}
+
+.badge_best {
+    background: var(--gold);
+    color: var(--navy-dark);
+}
+
+.badge_paid {
+    background: var(--gold-light);
+    color: var(--gold-dark);
+}
+
+.badge_sent {
+    background: #dde6f7;
+    color: var(--navy-light);
+}
+
+.badge_done {
+    background: #dcefe5;
+    color: var(--green);
+}
+
+.badge_cancel {
+    background: #f7dedc;
+    color: var(--red);
+}

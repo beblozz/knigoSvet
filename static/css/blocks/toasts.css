@@ -1,0 +1,30 @@
+.toasts {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.toasts__item {
+    padding: 14px 20px;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    box-shadow: var(--shadow-big);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.toasts__item_error {
+    border-left-color: var(--red);
+}
+
+.toasts__item_hidden {
+    opacity: 0;
+    transform: translateY(10px);
+}

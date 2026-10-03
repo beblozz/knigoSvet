@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Каталог книг — КнигоСвет{% endblock %}
+
+{% block content %}
+<section class="section section_top catalog">
+    <div class="container">
+        <nav class="breadcrumbs">
+            <a class="breadcrumbs__link" href="{% url 'home' %}">Главная</a>
+            <span class="breadcrumbs__current">Каталог</span>
+        </nav>
+        <span class="section__label">Каталог</span>
+        <h1 class="section__title">Все книги магазина</h1>
+
+        <form class="catalog__layout" id="filter-form" method="get">
+            <aside class="filter" id="filter">
+                <div class="filter__group">
+                    <span class="filter__title">Поиск</span>
+                    <div class="filter__search">
+                        <input class="form__input" type="search" name="q" value="{{ search }}" placeholder="Название или автор">
+                    </div>
+                </div>
+
+                <div class="filter__group">
+                    <span class="filter__title">Жанр</span>
+                    <label class="filter__option">
+                        <input class="filter__radio" type="radio" name="genre" value="" {% if not genre_slug %}checked{% endif %}>
+                        <span class="filter__name">Все жанры</span>
+                    </label>
+                    {% for genre in genres %}
+                        <label class="filter__option">
+                            <input class="filter__radio" type="radio" name="genre" value="{{ genre.slug }}" {% if genre.slug == genre_slug %}checked{% endif %}>
+                            <span class="filter__name">{{ genre.name }}</span>
+                            <span class="filter__count">{{ genre.books.count }}</span>
+                        </label>
+                    {% endfor %}
+                </div>
+
+                <div class="filter__group">
+                    <span class="filter__title">Автор</span>
+                    <select class="form__input" name="author">
+                        <option value="">Все авторы</option>
+                        {% for author in authors %}
+                            <option value="{{ author.id }}" {% if author.id|stringformat:"s" == author_id %}selected{% endif %}>{{ author.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="filter__group">
+                    <span class="filter__title">Цена, ₽</span>
+                    <div class="filter__prices">
+                        <input class="form__input" type="number" name="price_min" value="{{ price_min }}" placeholder="от" min="0">
+                        <input class="form__input" type="number" name="price_max" value="{{ price_max }}" placeholder="до" min="0">
+                    </div>
+                </div>
+
+                <div class="filter__group">
+                    <label class="filter__option">
+                        <input class="filter__radio" type="checkbox" name="in_stock" value="1" {% if in_stock %}checked{% endif %}>
+                        <span class="filter__name">Только в наличии</span>
+                    </label>
+                    <label class="filter__option">
+                        <input class="filter__radio" type="checkbox" name="new" value="1" {% if only_new %}checked{% endif %}>
+                        <span class="filter__name">Только новинки</span>
+                    </label>
+                </div>
+
+                <button class="button button_wide" type="submit">Показать</button>
+                <a class="filter__reset" href="{% url 'catalog' %}">Сбросить фильтры</a>
+            </aside>
+
+            <div class="catalog__content">
+                <div class="catalog__top">
+                    <p class="catalog__total">Найдено книг: <b>{{ total }}</b></p>
+                    <button class="catalog__filter-button" id="filter-button" type="button">{% include 'icons/filter.svg' %} Фильтры</button>
+                    <label class="catalog__sort">
+                        <span class="catalog__sort-text">Сортировать:</span>
+                        <select class="form__input form__input_small" name="sort" id="sort">
+                            <option value="new" {% if sort == 'new' %}selected{% endif %}>Сначала новые</option>
+                            <option value="cheap" {% if sort == 'cheap' %}selected{% endif %}>Сначала дешёвые</option>
+                            <option value="expensive" {% if sort == 'expensive' %}selected{% endif %}>Сначала дорогие</option>
+                            <option value="title" {% if sort == 'title' %}selected{% endif %}>По названию</option>
+                        </select>
+                    </label>
+                </div>
+
+                {% if page %}
+                    <div class="catalog__grid">
+                        {% for book in page %}
+                            {% include 'includes/book_card.html' %}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty">
+                        <p class="empty__title">Ничего не нашлось</p>
+                        <p class="empty__text">Попробуйте изменить запрос или сбросить фильтры</p>
+                        <a class="button" href="{% url 'catalog' %}">Сбросить фильтры</a>
+                    </div>
+                {% endif %}
+
+                {% if page.paginator.num_pages > 1 %}
+                    <nav class="pagination">
+                        {% if page.has_previous %}
+                            <a class="pagination__link" href="?{{ params }}&page={{ page.previous_page_number }}">{% include 'icons/left.svg' %}</a>
+                        {% endif %}
+                        {% for number in page.paginator.page_range %}
+                            <a class="pagination__link {% if number == page.number %}pagination__link_active{% endif %}" href="?{{ params }}&page={{ number }}">{{ number }}</a>
+                        {% endfor %}
+                        {% if page.has_next %}
+                            <a class="pagination__link" href="?{{ params }}&page={{ page.next_page_number }}">{% include 'icons/right.svg' %}</a>
+                        {% endif %}
+                    </nav>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/catalog.js' %}"></script>
+{% endblock %}

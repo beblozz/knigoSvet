@@ -1,0 +1,61 @@
+{% extends 'panel/base.html' %}
+
+{% block content %}
+<div class="panel__head">
+    <div>
+        <span class="section__label">Справочники</span>
+        <h1 class="panel__title">Авторы, жанры и заявки</h1>
+    </div>
+</div>
+
+<div class="panel__grid">
+    <section class="panel__card">
+        <h2 class="panel__card-title">Авторы</h2>
+        <form class="panel__search" method="post">
+            {% csrf_token %}
+            {{ author_form.name }}
+            <button class="button" type="submit" name="author" value="1">Добавить</button>
+        </form>
+        <ul class="rows rows_scroll">
+            {% for author in authors %}
+                <li class="rows__item"><span class="rows__name">{{ author.name }}</span><span class="rows__value">{{ author.count }} кн.</span></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section class="panel__card">
+        <h2 class="panel__card-title">Жанры</h2>
+        <form class="panel__search" method="post">
+            {% csrf_token %}
+            {{ genre_form.name }}
+            <button class="button" type="submit" name="genre" value="1">Добавить</button>
+        </form>
+        <ul class="rows rows_scroll">
+            {% for genre in genres %}
+                <li class="rows__item"><span class="rows__name">{{ genre.name }}</span><span class="rows__value">{{ genre.count }} кн.</span></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section class="panel__card">
+        <h2 class="panel__card-title">Заявки на звонок</h2>
+        <ul class="rows rows_scroll">
+            {% for call in calls %}
+                <li class="rows__item">
+                    <span class="rows__name">{{ call.phone }}<span class="table__sub">{{ call.created|date:"d.m.Y H:i" }}</span></span>
+                    {% if call.is_done %}
+                        <span class="badge badge_done">Обработана</span>
+                    {% else %}
+                        <form action="{% url 'panel_call_done' call.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="button button_small" type="submit">Готово</button>
+                        </form>
+                    {% endif %}
+                </li>
+            {% empty %}
+                <li class="rows__item">Заявок пока нет</li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+{% endblock %}

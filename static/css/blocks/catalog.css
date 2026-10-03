@@ -1,0 +1,122 @@
+.catalog__layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+.catalog__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.catalog__total {
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.catalog__sort {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.catalog__filter-button {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.catalog__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.catalog__grid_four {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 40px;
+}
+
+.pagination__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 8px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    transition: background 0.2s;
+}
+
+.pagination__link:hover {
+    background: var(--surface-dark);
+}
+
+.pagination__link_active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--white);
+}
+
+.pagination__link_active:hover {
+    background: var(--navy);
+}
+
+.pagination__link .icon {
+    width: 16px;
+    height: 16px;
+}
+
+@media (max-width: 1080px) {
+    .catalog__grid,
+    .catalog__grid_four {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 760px) {
+    .catalog__layout {
+        grid-template-columns: 1fr;
+    }
+
+    .catalog__filter-button {
+        display: flex;
+    }
+
+    .catalog__top {
+        flex-wrap: wrap;
+    }
+
+    .catalog__sort-text {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .catalog__grid,
+    .catalog__grid_four {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,129 @@
+.products__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 32px;
+}
+
+.products__pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.products__item {
+    display: flex;
+    flex-direction: column;
+}
+
+.products__cover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 260px;
+    padding: 24px;
+    background: var(--surface);
+    border-radius: 4px;
+    margin-bottom: 12px;
+    transition: background 0.2s;
+}
+
+.products__item:hover .products__cover {
+    background: var(--surface-dark);
+}
+
+.products__image {
+    max-height: 100%;
+    border-radius: 3px;
+    box-shadow: var(--shadow-big);
+    transition: transform 0.3s;
+}
+
+.products__item:hover .products__image {
+    transform: translateY(-6px);
+}
+
+.products__name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.products__info {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.products__banner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 306px;
+    padding: 40px;
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 4px;
+}
+
+.products__banner_gold {
+    background: var(--gold);
+    color: var(--navy-dark);
+}
+
+.products__banner-title {
+    font-family: var(--font-title);
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.15;
+    text-transform: uppercase;
+}
+
+.products__banner-subtitle {
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 28px;
+}
+
+.products__banner .button {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--navy-dark);
+}
+
+.products__banner .button:hover {
+    background: var(--white);
+    border-color: var(--white);
+}
+
+.products__banner_gold .button {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--white);
+}
+
+.products__banner_gold .button:hover {
+    color: var(--navy);
+}
+
+@media (max-width: 900px) {
+    .products__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .products__banner {
+        min-height: 220px;
+        padding: 28px;
+    }
+
+    .products__banner-title {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 480px) {
+    .products__cover {
+        height: 200px;
+        padding: 16px;
+    }
+}

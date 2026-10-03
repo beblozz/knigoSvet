@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Заказ оформлен — КнигоСвет{% endblock %}
+
+{% block content %}
+<section class="section section_top">
+    <div class="container">
+        <div class="empty">
+            <span class="section__label">Спасибо за покупку</span>
+            <p class="empty__title">Заказ №{{ order.id }} оформлен</p>
+            <p class="empty__text">Сумма заказа: {{ order.total|floatformat:"0g" }} ₽. Способ получения: {{ order.get_delivery_display|lower }}. Мы позвоним по номеру {{ order.phone }}, чтобы подтвердить заказ.</p>
+            <a class="button" href="{% url 'catalog' %}">Вернуться в каталог</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

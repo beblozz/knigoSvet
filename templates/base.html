@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}КнигоСвет — книжный интернет-магазин{% endblock %}</title>
+    <meta name="description" content="КнигоСвет — интернет-магазин книг: классика, современная проза, фантастика, нон-фикшн и детская литература.">
+    <link rel="icon" href="{% static 'img/favicon.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="page" data-auth="{% if user.is_authenticated %}1{% else %}0{% endif %}" data-login="{% url 'login' %}">
+    {% include 'includes/header.html' %}
+
+    <main class="page__main">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include 'includes/footer.html' %}
+
+    <div class="toasts" id="toasts">
+        {% for message in messages %}
+            <div class="toasts__item toasts__item_{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/cart.js' %}"></script>
+    <script src="{% static 'js/favorite.js' %}"></script>
+    <script src="{% static 'js/call.js' %}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

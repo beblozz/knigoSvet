@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="hero">
+    <div class="container hero__inner">
+        <div class="hero__content">
+            <h1 class="hero__title">Зажигаем свет в каждой прочитанной книге</h1>
+            <p class="hero__text">Мы гордимся тем, что собираем лучшие издания: от русской классики до современного нон-фикшна. В каталоге уже {{ books_count }} книг, и каждую мы доставим бережно и в срок.</p>
+            <a class="button" href="{% url 'catalog' %}">Перейти в каталог</a>
+        </div>
+    </div>
+    <div class="hero__photo">
+        <img class="hero__image" src="{% static 'img/hero.webp' %}" alt="Читальный зал с книжными полками">
+    </div>
+</section>
+
+<section class="section products">
+    <div class="container">
+        <span class="section__label">Каталог</span>
+        <h2 class="section__title">Классика, новинки, нон-фикшн и детские книги в одном магазине</h2>
+
+        <div class="products__grid">
+            <div class="products__pair">
+                {% for book in new_books|slice:":2" %}
+                    <a class="products__item" href="{{ book.get_absolute_url }}">
+                        <span class="products__cover"><img class="products__image" src="{{ book.image.url }}" alt="{{ book.title }}" loading="lazy"></span>
+                        <span class="products__name">{{ book.title }}</span>
+                        <span class="products__info">{{ book.author }} · {{ book.price|floatformat:"0g" }} ₽</span>
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="products__banner">
+                <p class="products__banner-title">Художественная</p>
+                <p class="products__banner-subtitle">литература</p>
+                <a class="button" href="{% url 'catalog' %}?genre=klassika">Подробнее</a>
+            </div>
+            <div class="products__banner products__banner_gold">
+                <p class="products__banner-title">Нон-фикшн</p>
+                <p class="products__banner-subtitle">и саморазвитие</p>
+                <a class="button" href="{% url 'catalog' %}?genre=non-fikshn">Подробнее</a>
+            </div>
+            <div class="products__pair">
+                {% for book in new_books|slice:"2:4" %}
+                    <a class="products__item" href="{{ book.get_absolute_url }}">
+                        <span class="products__cover"><img class="products__image" src="{{ book.image.url }}" alt="{{ book.title }}" loading="lazy"></span>
+                        <span class="products__name">{{ book.title }}</span>
+                        <span class="products__info">{{ book.author }} · {{ book.price|floatformat:"0g" }} ₽</span>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section slider" id="bestsellers">
+    <div class="container">
+        <span class="section__label">Бестселлеры</span>
+        <h2 class="section__title">Книги, которые выбирают наши читатели</h2>
+    </div>
+
+    <div class="slider__track" id="slider-track">
+        {% for book in bestsellers %}
+            <a class="slider__item" href="{{ book.get_absolute_url }}">
+                <span class="slider__cover"><img class="slider__image" src="{{ book.image.url }}" alt="{{ book.title }}" loading="lazy"></span>
+                <span class="slider__name">{{ book.title }}</span>
+                <span class="slider__info">{{ book.author }} · {{ book.price|floatformat:"0g" }} ₽</span>
+            </a>
+        {% endfor %}
+    </div>
+    <div class="slider__bar"><span class="slider__thumb" id="slider-thumb"></span></div>
+</section>
+
+<section class="section advantages" id="about">
+    <div class="container">
+        <h2 class="section__title section__title_center">Преимущества</h2>
+
+        <div class="advantages__tabs">
+            <button class="advantages__arrow" id="adv-prev" type="button" aria-label="Назад">{% include 'icons/left.svg' %}</button>
+            <div class="advantages__list">
+                <button class="advantages__tab advantages__tab_active" type="button" data-title="Проверенные издания" data-text="Работаем напрямую с издательствами АСТ, Эксмо, Азбука и МИФ. Каждая книга проходит проверку перед отправкой: никаких замятых углов и типографского брака. Плотная бумага и качественная печать." data-number="{{ books_count }}" data-caption="книг в каталоге">{% include 'icons/book.svg' %}</button>
+                <button class="advantages__tab" type="button" data-title="Быстрая доставка" data-text="Собираем заказ в день оформления. Курьером по городу — на следующий день, почтой по России — от трёх дней. Можно забрать самому из магазина бесплатно." data-number="1 день" data-caption="до доставки курьером">{% include 'icons/truck.svg' %}</button>
+                <button class="advantages__tab" type="button" data-title="Честные цены" data-text="Не накручиваем цену ради красивой скидки. На популярные книги каждую неделю действуют акции, а старая цена в карточке всегда настоящая." data-number="до −30%" data-caption="на книги недели">{% include 'icons/percent.svg' %}</button>
+                <button class="advantages__tab" type="button" data-title="Гарантия возврата" data-text="Если книга пришла с дефектом или просто не подошла, вернём деньги или обменяем её в течение 14 дней. Без лишних вопросов." data-number="14 дней" data-caption="на обмен и возврат">{% include 'icons/shield.svg' %}</button>
+                <button class="advantages__tab" type="button" data-title="Живые отзывы" data-text="Отзывы оставляют только зарегистрированные читатели. Рейтинг книги считается по реальным оценкам и помогает выбрать, что почитать следующим." data-number="5 ★" data-caption="оценка от читателей">{% include 'icons/chat.svg' %}</button>
+            </div>
+            <button class="advantages__arrow" id="adv-next" type="button" aria-label="Вперёд">{% include 'icons/right.svg' %}</button>
+        </div>
+
+        <div class="advantages__content">
+            <div class="advantages__info">
+                <h3 class="advantages__title" id="adv-title">Проверенные издания</h3>
+                <p class="advantages__text" id="adv-text">Работаем напрямую с издательствами АСТ, Эксмо, Азбука и МИФ. Каждая книга проходит проверку перед отправкой: никаких замятых углов и типографского брака. Плотная бумага и качественная печать.</p>
+            </div>
+            <div class="advantages__picture">
+                <span class="advantages__number" id="adv-number">{{ books_count }}</span>
+                <span class="advantages__caption" id="adv-caption">книг в каталоге</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section steps" id="steps">
+    <div class="container">
+        <span class="section__label">Пошаговые этапы</span>
+        <h2 class="section__title">Что вы получите при заказе на нашем сайте</h2>
+
+        <div class="steps__grid">
+            <div class="steps__item"><span class="steps__number">01</span><span class="steps__text">Выбор книги в каталоге</span></div>
+            <div class="steps__item"><span class="steps__number">02</span><span class="steps__text">Добавление в корзину</span></div>
+            <div class="steps__item"><span class="steps__number">03</span><span class="steps__text">Оформление заказа</span></div>
+            <div class="steps__item"><span class="steps__number">04</span><span class="steps__text">Сборка и упаковка</span></div>
+            <div class="steps__item"><span class="steps__number">05</span><span class="steps__text">Доставка</span></div>
+            <div class="steps__item"><span class="steps__number">06</span><span class="steps__text">Гарантия и возврат</span></div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/slider.js' %}"></script>
+<script src="{% static 'js/advantages.js' %}"></script>
+{% endblock %}

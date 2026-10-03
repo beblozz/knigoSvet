@@ -1,0 +1,29 @@
+<article class="book-card">
+    <a class="book-card__cover" href="{{ book.get_absolute_url }}">
+        {% if book.image %}
+            <img class="book-card__image" src="{{ book.image.url }}" alt="{{ book.title }}" loading="lazy">
+        {% else %}
+            <span class="book-card__empty">{{ book.title }}</span>
+        {% endif %}
+        <span class="book-card__badges">
+            {% if book.is_new %}<span class="badge badge_new">Новинка</span>{% endif %}
+            {% if book.discount %}<span class="badge badge_sale">−{{ book.discount }}%</span>{% endif %}
+        </span>
+    </a>
+    <button class="book-card__favorite {% if book.id in favorite_ids %}book-card__favorite_active{% endif %} js-favorite" type="button" data-url="{% url 'favorite_toggle' book.id %}" aria-label="В избранное">{% include 'icons/heart.svg' %}</button>
+    <div class="book-card__body">
+        <p class="book-card__author">{{ book.author }}</p>
+        <a class="book-card__title" href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+        <div class="book-card__bottom">
+            <div class="book-card__prices">
+                <span class="book-card__price">{{ book.price|floatformat:"0g" }} ₽</span>
+                {% if book.discount %}<span class="book-card__old">{{ book.old_price|floatformat:"0g" }} ₽</span>{% endif %}
+            </div>
+            {% if book.stock > 0 %}
+                <button class="button button_small js-cart-add" type="button" data-url="{% url 'cart_add' book.id %}">В корзину</button>
+            {% else %}
+                <span class="book-card__out">Нет в наличии</span>
+            {% endif %}
+        </div>
+    </div>
+</article>
