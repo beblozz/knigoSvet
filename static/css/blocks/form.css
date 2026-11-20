@@ -141,3 +141,54 @@
         padding: 20px;
     }
 }
+
+.form__star {
+    color: var(--red);
+}
+
+.form__field_error .form__input {
+    border-color: var(--red);
+    background: #fdf3f2;
+}
+
+.form__error_block {
+    display: block;
+    padding: 12px 14px;
+    background: #f7dedc;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.form__note {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.form__ticket {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 14px;
+    padding: 16px 20px;
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 14px;
+}
+
+.form__ticket-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+}
+
+.form__ticket-number {
+    font-family: var(--font-title);
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.form__ticket-note {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+}

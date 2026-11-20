@@ -1,36 +1,25 @@
 {% load static %}
-<footer class="footer" id="call">
+<footer class="footer">
     <div class="container footer__inner">
         <div class="footer__about">
             <a class="footer__logo" href="{% url 'home' %}">
                 <img class="footer__logo-image" src="{% static 'img/logo.png' %}" alt="КнигоСвет" width="120" height="110">
             </a>
-            <p class="footer__guarantee">100% гарантия<br>качества изданий</p>
-            <span class="footer__caption">Мы в социальных сетях</span>
-            <div class="footer__social">
-                <a class="footer__social-link" href="https://vk.com" target="_blank" rel="noopener">VK</a>
-                <a class="footer__social-link" href="https://t.me" target="_blank" rel="noopener">TG</a>
-                <a class="footer__social-link" href="https://github.com/beblozz/knigoSvet" target="_blank" rel="noopener">GIT</a>
-            </div>
+            <p class="footer__guarantee">Электронный каталог<br>библиотечного фонда</p>
         </div>
 
         <div class="footer__call">
-            <h2 class="footer__title">Хотите читать<br>с удовольствием?<br>Звоните нам!</h2>
-            <form class="footer__form" id="call-form" action="{% url 'call_request' %}" method="post">
-                {% csrf_token %}
-                <input class="footer__input" type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
-                <button class="footer__button" type="submit">Заказать звонок</button>
-            </form>
-            <p class="footer__result" id="call-result"></p>
+            <h2 class="footer__title">Нашли книгу?<br>Приходите<br>с читательским билетом</h2>
+            <p class="footer__text">Отметка «Доступна» в каталоге значит, что свободный экземпляр есть на полке прямо сейчас.</p>
         </div>
 
         <div class="footer__contacts">
             <span class="footer__label">Контакты</span>
             <a class="footer__contact" href="tel:+74951234567">+7 (495) 123 45 67</a>
-            <a class="footer__contact" href="tel:+78005553535">+7 (800) 555 35 35</a>
-            <a class="footer__contact" href="mailto:info@knigosvet.ru">info@knigosvet.ru</a>
-            <span class="footer__contact">Ежедневно с 9:00 до 21:00</span>
+            <a class="footer__contact" href="mailto:library@knigosvet.local">library@knigosvet.local</a>
+            <span class="footer__contact">Пн–Сб с 10:00 до 20:00</span>
+            <span class="footer__contact">Воскресенье — выходной</span>
         </div>
     </div>
-    <p class="footer__copy">{% now 'Y' %} © КнигоСвет. Учебный проект для портфолио</p>
+    <p class="footer__copy">{% now 'Y' %} © КнигоСвет. Учебный проект, вариант 1 «Учёт библиотечного фонда»</p>
 </footer>

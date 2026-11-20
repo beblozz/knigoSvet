@@ -1,6 +1,6 @@
-from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 
 class Genre(models.Model):
@@ -17,42 +17,18 @@ class Genre(models.Model):
         return self.name
 
 
-class Author(models.Model):
-    name = models.CharField('Имя', max_length=150)
-    about = models.TextField('Об авторе', blank=True)
-
-    class Meta:
-        verbose_name = 'Автор'
-        verbose_name_plural = 'Авторы'
-        ordering = ['name']
-
-    def __str__(self):
-        return self.name
-
-
 class Book(models.Model):
-    COVER_CHOICES = [
-        ('hard', 'Твёрдый переплёт'),
-        ('soft', 'Мягкая обложка'),
-    ]
-
     title = models.CharField('Название', max_length=200)
     slug = models.SlugField('Ссылка', unique=True, max_length=200)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='books', verbose_name='Автор')
-    genre = models.ForeignKey(Genre, on_delete=models.CASCADE, related_name='books', verbose_name='Жанр')
-    description = models.TextField('Описание')
+    author = models.CharField('Автор', max_length=150)
+    genre = models.ForeignKey(Genre, on_delete=models.PROTECT, related_name='books', verbose_name='Жанр')
+    description = models.TextField('Описание', blank=True)
     image = models.ImageField('Обложка', upload_to='books/', blank=True)
-    price = models.DecimalField('Цена', max_digits=8, decimal_places=2)
-    old_price = models.DecimalField('Старая цена', max_digits=8, decimal_places=2, null=True, blank=True)
-    stock = models.PositiveIntegerField('На складе', default=0)
     publisher = models.CharField('Издательство', max_length=150, blank=True)
     year = models.PositiveIntegerField('Год издания', default=2024)
     pages = models.PositiveIntegerField('Страниц', default=0)
     isbn = models.CharField('ISBN', max_length=20, blank=True)
-    cover = models.CharField('Переплёт', max_length=10, choices=COVER_CHOICES, default='hard')
-    age = models.CharField('Возраст', max_length=5, default='16+')
-    is_new = models.BooleanField('Новинка', default=False)
-    is_bestseller = models.BooleanField('Бестселлер', default=False)
+    copies = models.PositiveIntegerField('Экземпляров в фонде', default=1)
     created = models.DateTimeField('Добавлена', auto_now_add=True)
 
     class Meta:
@@ -66,59 +42,60 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse('book', args=[self.slug])
 
-    def discount(self):
-        if self.old_price and self.old_price > self.price:
-            return int(100 - self.price * 100 / self.old_price)
-        return 0
+    def on_hands(self):
+        return self.loans.filter(returned__isnull=True).count()
 
-    def rating(self):
-        reviews = self.reviews.all()
-        if len(reviews) == 0:
+    def available(self):
+        count = self.copies - self.on_hands()
+        if count < 0:
             return 0
-        total = 0
-        for review in reviews:
-            total += review.rating
-        return round(total / len(reviews), 1)
+        return count
+
+    def is_available(self):
+        return self.available() > 0
 
 
-class Review(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='reviews', verbose_name='Книга')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews', verbose_name='Пользователь')
-    rating = models.PositiveIntegerField('Оценка', default=5)
-    text = models.TextField('Текст')
-    created = models.DateTimeField('Дата', auto_now_add=True)
-
-    class Meta:
-        verbose_name = 'Отзыв'
-        verbose_name_plural = 'Отзывы'
-        ordering = ['-created']
-
-    def __str__(self):
-        return self.book.title + ' - ' + self.user.username
-
-
-class Favorite(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favorites', verbose_name='Пользователь')
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='favorites', verbose_name='Книга')
+class Reader(models.Model):
+    full_name = models.CharField('ФИО', max_length=150)
+    card = models.CharField('Номер читательского билета', max_length=20, unique=True)
+    phone = models.CharField('Телефон', max_length=20)
+    email = models.EmailField('Электронная почта', blank=True)
+    created = models.DateTimeField('Записан', auto_now_add=True)
 
     class Meta:
-        verbose_name = 'Избранное'
-        verbose_name_plural = 'Избранное'
-        unique_together = ['user', 'book']
+        verbose_name = 'Читатель'
+        verbose_name_plural = 'Читатели'
+        ordering = ['full_name']
 
     def __str__(self):
-        return self.user.username + ' - ' + self.book.title
+        return self.full_name + ' (' + self.card + ')'
+
+    def on_hands(self):
+        return self.loans.filter(returned__isnull=True).count()
+
+    def overdue(self):
+        return self.loans.filter(returned__isnull=True, due__lt=timezone.localdate()).count()
 
 
-class CallRequest(models.Model):
-    phone = models.CharField('Телефон', max_length=30)
-    created = models.DateTimeField('Дата', auto_now_add=True)
-    is_done = models.BooleanField('Обработана', default=False)
+class Loan(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.PROTECT, related_name='loans', verbose_name='Книга')
+    reader = models.ForeignKey(Reader, on_delete=models.PROTECT, related_name='loans', verbose_name='Читатель')
+    issued = models.DateField('Дата выдачи', default=timezone.localdate)
+    due = models.DateField('Вернуть до')
+    returned = models.DateField('Дата возврата', null=True, blank=True)
 
     class Meta:
-        verbose_name = 'Заявка на звонок'
-        verbose_name_plural = 'Заявки на звонок'
-        ordering = ['-created']
+        verbose_name = 'Выдача'
+        verbose_name_plural = 'Журнал выдач'
+        ordering = ['due']
 
     def __str__(self):
-        return self.phone
+        return self.book.title + ' — ' + self.reader.full_name
+
+    def is_overdue(self):
+        return self.returned is None and self.due < timezone.localdate()
+
+    def days_overdue(self):
+        if not self.is_overdue():
+            return 0
+        return (timezone.localdate() - self.due).days

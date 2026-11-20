@@ -9,8 +9,9 @@
     <a class="button button_outline" href="{% url 'panel_books' %}">Назад к списку</a>
 </div>
 
-<form class="form panel__form" method="post" enctype="multipart/form-data">
+<form class="form panel__form" method="post" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
+    <p class="form__note">Поля со звёздочкой обязательны.</p>
     {% include 'includes/field.html' with field=form.title %}
     <div class="form__row">
         {% include 'includes/field.html' with field=form.author %}
@@ -22,23 +23,13 @@
         {% include 'includes/field.html' with field=form.image %}
     </div>
     <div class="form__row form__row_three">
-        {% include 'includes/field.html' with field=form.price %}
-        {% include 'includes/field.html' with field=form.old_price %}
-        {% include 'includes/field.html' with field=form.stock %}
-    </div>
-    <div class="form__row form__row_three">
         {% include 'includes/field.html' with field=form.publisher %}
         {% include 'includes/field.html' with field=form.year %}
         {% include 'includes/field.html' with field=form.pages %}
     </div>
-    <div class="form__row form__row_three">
+    <div class="form__row">
         {% include 'includes/field.html' with field=form.isbn %}
-        {% include 'includes/field.html' with field=form.cover %}
-        {% include 'includes/field.html' with field=form.age %}
-    </div>
-    <div class="form__checks">
-        <label class="form__check">{{ form.is_new }} Новинка</label>
-        <label class="form__check">{{ form.is_bestseller }} Бестселлер</label>
+        {% include 'includes/field.html' with field=form.copies %}
     </div>
     <button class="button" type="submit">Сохранить</button>
 </form>

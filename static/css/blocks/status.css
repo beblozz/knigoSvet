@@ -1,0 +1,41 @@
+/* Отметки наличия книги и состояния выдачи */
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.3;
+    border-radius: 100px;
+    white-space: nowrap;
+}
+
+.status::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.status_free {
+    background: #dcefe5;
+    color: var(--green);
+}
+
+.status_busy {
+    background: var(--gold-light);
+    color: var(--gold-dark);
+}
+
+.status_overdue {
+    background: var(--red);
+    color: var(--white);
+}
+
+.status_small {
+    margin-left: 8px;
+    padding: 2px 8px;
+    font-size: 11px;
+}

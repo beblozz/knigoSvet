@@ -220,3 +220,39 @@
         grid-template-columns: 1fr;
     }
 }
+
+.book__aside-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+}
+
+.book__buy .status {
+    align-self: flex-start;
+    font-size: 14px;
+    padding: 6px 14px;
+}
+
+.book__copies {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.book__copy {
+    display: flex;
+    justify-content: space-between;
+}
+
+.book__copy dd {
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.book__hint {
+    font-size: 13px;
+    color: var(--gold-dark);
+}

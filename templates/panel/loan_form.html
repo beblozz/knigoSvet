@@ -1,0 +1,29 @@
+{% extends 'panel/base.html' %}
+
+{% block content %}
+<div class="panel__head">
+    <div>
+        <span class="section__label">Журнал выдач</span>
+        <h1 class="panel__title">Оформить выдачу</h1>
+    </div>
+    <a class="button button_outline" href="{% url 'panel_loans' %}">Назад к журналу</a>
+</div>
+
+<form class="form panel__form panel__form_narrow" method="post" novalidate>
+    {% csrf_token %}
+    {% for error in form.non_field_errors %}
+        <span class="form__error form__error_block">{{ error }}</span>
+    {% endfor %}
+    {% include 'includes/field.html' with field=form.reader %}
+    {% include 'includes/field.html' with field=form.book %}
+    <div class="form__row">
+        {% include 'includes/field.html' with field=form.issued %}
+        {% include 'includes/field.html' with field=form.due %}
+    </div>
+    <p class="form__note">* — обязательные поля. Обычный срок — 14 дней, не больше 60. Читателю с просроченными книгами новую книгу не выдаём, на руках одновременно — не больше 5 книг.</p>
+    <div class="panel__buttons">
+        <button class="button" type="submit">Выдать книгу</button>
+        <a class="button button_outline" href="{% url 'panel_reader_add' %}">Записать нового читателя</a>
+    </div>
+</form>
+{% endblock %}

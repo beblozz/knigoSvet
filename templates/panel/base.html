@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Панель управления — КнигоСвет{% endblock %}</title>
+    <title>{% block title %}Раздел библиотекаря — КнигоСвет{% endblock %}</title>
     <link rel="icon" href="{% static 'img/favicon.png' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,13 +17,14 @@
         <a class="panel__logo" href="{% url 'home' %}">
             <img class="panel__logo-image" src="{% static 'img/logo.png' %}" alt="КнигоСвет" width="120" height="110">
         </a>
-        <span class="panel__caption">Панель управления</span>
+        <span class="panel__caption">Раздел библиотекаря</span>
         <nav class="panel__menu">
-            <a class="panel__link {% if active == 'dashboard' %}panel__link_active{% endif %}" href="{% url 'panel' %}">{% include 'icons/chart.svg' %} Статистика</a>
+            <a class="panel__link {% if active == 'dashboard' %}panel__link_active{% endif %}" href="{% url 'panel' %}">{% include 'icons/chart.svg' %} Сводка</a>
             <a class="panel__link {% if active == 'books' %}panel__link_active{% endif %}" href="{% url 'panel_books' %}">{% include 'icons/book.svg' %} Книги</a>
-            <a class="panel__link {% if active == 'orders' %}panel__link_active{% endif %}" href="{% url 'panel_orders' %}">{% include 'icons/box.svg' %} Заказы</a>
-            <a class="panel__link {% if active == 'extra' %}panel__link_active{% endif %}" href="{% url 'panel_extra' %}">{% include 'icons/list.svg' %} Справочники и заявки</a>
-            <a class="panel__link" href="{% url 'home' %}">{% include 'icons/home.svg' %} На сайт</a>
+            <a class="panel__link {% if active == 'readers' %}panel__link_active{% endif %}" href="{% url 'panel_readers' %}">{% include 'icons/user.svg' %} Читатели</a>
+            <a class="panel__link {% if active == 'loans' %}panel__link_active{% endif %}" href="{% url 'panel_loans' %}">{% include 'icons/box.svg' %} Журнал выдач</a>
+            <a class="panel__link {% if active == 'genres' %}panel__link_active{% endif %}" href="{% url 'panel_genres' %}">{% include 'icons/list.svg' %} Жанры</a>
+            <a class="panel__link" href="{% url 'home' %}">{% include 'icons/home.svg' %} Каталог для читателей</a>
         </nav>
         <form class="panel__logout" action="{% url 'logout' %}" method="post">
             {% csrf_token %}
@@ -44,12 +45,13 @@
 
     <div class="modal" id="modal">
         <div class="modal__window">
-            <h2 class="modal__title">Удалить книгу?</h2>
+            <h2 class="modal__title" id="modal-title">Удалить книгу?</h2>
             <p class="modal__text" id="modal-text"></p>
             <form class="modal__buttons" id="modal-form" method="post">
                 {% csrf_token %}
+                <input type="hidden" name="next" id="modal-next">
                 <button class="button button_outline" id="modal-cancel" type="button">Отмена</button>
-                <button class="button button_danger" type="submit">Удалить</button>
+                <button class="button button_danger" id="modal-submit" type="submit">Удалить</button>
             </form>
         </div>
     </div>

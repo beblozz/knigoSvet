@@ -5,9 +5,18 @@
 <section class="hero">
     <div class="container hero__inner">
         <div class="hero__content">
-            <h1 class="hero__title">Зажигаем свет в каждой прочитанной книге</h1>
-            <p class="hero__text">Мы гордимся тем, что собираем лучшие издания: от русской классики до современного нон-фикшна. В каталоге уже {{ books_count }} книг, и каждую мы доставим бережно и в срок.</p>
-            <a class="button" href="{% url 'catalog' %}">Перейти в каталог</a>
+            <span class="section__label">Электронный каталог</span>
+            <h1 class="hero__title">Найдите книгу в фонде библиотеки</h1>
+            <p class="hero__text">Ищите по названию или автору и сразу смотрите, есть ли свободный экземпляр на полке.</p>
+            <form class="hero__search" action="{% url 'catalog' %}" method="get" role="search">
+                <input class="form__input hero__input" type="search" name="q" placeholder="Название книги или автор" aria-label="Поиск книги">
+                <button class="button" type="submit">{% include 'icons/search.svg' %} Найти</button>
+            </form>
+            <div class="hero__stats">
+                <div class="hero__stat"><span class="hero__number">{{ books_count }}</span><span class="hero__caption">книг в фонде</span></div>
+                <div class="hero__stat"><span class="hero__number">{{ free_count }}</span><span class="hero__caption">экземпляров на полках</span></div>
+                <div class="hero__stat"><span class="hero__number">{{ readers_count }}</span><span class="hero__caption">читателей</span></div>
+            </div>
         </div>
     </div>
     <div class="hero__photo">
@@ -15,109 +24,59 @@
     </div>
 </section>
 
-<section class="section products">
+<section class="section genres" id="genres">
     <div class="container">
-        <span class="section__label">Каталог</span>
-        <h2 class="section__title">Классика, новинки, нон-фикшн и детские книги в одном магазине</h2>
-
-        <div class="products__grid">
-            <div class="products__pair">
-                {% for book in new_books|slice:":2" %}
-                    <a class="products__item" href="{{ book.get_absolute_url }}">
-                        <span class="products__cover"><img class="products__image" src="{{ book.image.url }}" alt="{{ book.title }}" loading="lazy"></span>
-                        <span class="products__name">{{ book.title }}</span>
-                        <span class="products__info">{{ book.author }} · {{ book.price|floatformat:"0g" }} ₽</span>
-                    </a>
-                {% endfor %}
-            </div>
-            <div class="products__banner">
-                <p class="products__banner-title">Художественная</p>
-                <p class="products__banner-subtitle">литература</p>
-                <a class="button" href="{% url 'catalog' %}?genre=klassika">Подробнее</a>
-            </div>
-            <div class="products__banner products__banner_gold">
-                <p class="products__banner-title">Нон-фикшн</p>
-                <p class="products__banner-subtitle">и саморазвитие</p>
-                <a class="button" href="{% url 'catalog' %}?genre=non-fikshn">Подробнее</a>
-            </div>
-            <div class="products__pair">
-                {% for book in new_books|slice:"2:4" %}
-                    <a class="products__item" href="{{ book.get_absolute_url }}">
-                        <span class="products__cover"><img class="products__image" src="{{ book.image.url }}" alt="{{ book.title }}" loading="lazy"></span>
-                        <span class="products__name">{{ book.title }}</span>
-                        <span class="products__info">{{ book.author }} · {{ book.price|floatformat:"0g" }} ₽</span>
-                    </a>
-                {% endfor %}
-            </div>
+        <span class="section__label">Жанры</span>
+        <h2 class="section__title">С чего начать поиск</h2>
+        <div class="genres__grid">
+            {% for genre in genres %}
+                <a class="genres__item" href="{% url 'catalog' %}?genre={{ genre.slug }}">
+                    <span class="genres__name">{{ genre.name }}</span>
+                    <span class="genres__count">{{ genre.count }} кн.</span>
+                </a>
+            {% endfor %}
         </div>
     </div>
 </section>
 
-<section class="section slider" id="bestsellers">
+<section class="section section_surface" id="new">
     <div class="container">
-        <span class="section__label">Бестселлеры</span>
-        <h2 class="section__title">Книги, которые выбирают наши читатели</h2>
-    </div>
-
-    <div class="slider__track" id="slider-track">
-        {% for book in bestsellers %}
-            <a class="slider__item" href="{{ book.get_absolute_url }}">
-                <span class="slider__cover"><img class="slider__image" src="{{ book.image.url }}" alt="{{ book.title }}" loading="lazy"></span>
-                <span class="slider__name">{{ book.title }}</span>
-                <span class="slider__info">{{ book.author }} · {{ book.price|floatformat:"0g" }} ₽</span>
-            </a>
-        {% endfor %}
-    </div>
-    <div class="slider__bar"><span class="slider__thumb" id="slider-thumb"></span></div>
-</section>
-
-<section class="section advantages" id="about">
-    <div class="container">
-        <h2 class="section__title section__title_center">Преимущества</h2>
-
-        <div class="advantages__tabs">
-            <button class="advantages__arrow" id="adv-prev" type="button" aria-label="Назад">{% include 'icons/left.svg' %}</button>
-            <div class="advantages__list">
-                <button class="advantages__tab advantages__tab_active" type="button" data-title="Проверенные издания" data-text="Работаем напрямую с издательствами АСТ, Эксмо, Азбука и МИФ. Каждая книга проходит проверку перед отправкой: никаких замятых углов и типографского брака. Плотная бумага и качественная печать." data-number="{{ books_count }}" data-caption="книг в каталоге">{% include 'icons/book.svg' %}</button>
-                <button class="advantages__tab" type="button" data-title="Быстрая доставка" data-text="Собираем заказ в день оформления. Курьером по городу — на следующий день, почтой по России — от трёх дней. Можно забрать самому из магазина бесплатно." data-number="1 день" data-caption="до доставки курьером">{% include 'icons/truck.svg' %}</button>
-                <button class="advantages__tab" type="button" data-title="Честные цены" data-text="Не накручиваем цену ради красивой скидки. На популярные книги каждую неделю действуют акции, а старая цена в карточке всегда настоящая." data-number="до −30%" data-caption="на книги недели">{% include 'icons/percent.svg' %}</button>
-                <button class="advantages__tab" type="button" data-title="Гарантия возврата" data-text="Если книга пришла с дефектом или просто не подошла, вернём деньги или обменяем её в течение 14 дней. Без лишних вопросов." data-number="14 дней" data-caption="на обмен и возврат">{% include 'icons/shield.svg' %}</button>
-                <button class="advantages__tab" type="button" data-title="Живые отзывы" data-text="Отзывы оставляют только зарегистрированные читатели. Рейтинг книги считается по реальным оценкам и помогает выбрать, что почитать следующим." data-number="5 ★" data-caption="оценка от читателей">{% include 'icons/chat.svg' %}</button>
+        <div class="section__head">
+            <div>
+                <span class="section__label">Новые поступления</span>
+                <h2 class="section__title">Недавно добавлены в фонд</h2>
             </div>
-            <button class="advantages__arrow" id="adv-next" type="button" aria-label="Вперёд">{% include 'icons/right.svg' %}</button>
+            <a class="button button_outline" href="{% url 'catalog' %}">Весь каталог</a>
         </div>
-
-        <div class="advantages__content">
-            <div class="advantages__info">
-                <h3 class="advantages__title" id="adv-title">Проверенные издания</h3>
-                <p class="advantages__text" id="adv-text">Работаем напрямую с издательствами АСТ, Эксмо, Азбука и МИФ. Каждая книга проходит проверку перед отправкой: никаких замятых углов и типографского брака. Плотная бумага и качественная печать.</p>
-            </div>
-            <div class="advantages__picture">
-                <span class="advantages__number" id="adv-number">{{ books_count }}</span>
-                <span class="advantages__caption" id="adv-caption">книг в каталоге</span>
-            </div>
+        <div class="catalog__grid catalog__grid_four">
+            {% for book in new_books %}
+                {% include 'includes/book_card.html' %}
+            {% endfor %}
         </div>
     </div>
 </section>
 
-<section class="section steps" id="steps">
+<section class="section rules" id="rules">
     <div class="container">
-        <span class="section__label">Пошаговые этапы</span>
-        <h2 class="section__title">Что вы получите при заказе на нашем сайте</h2>
-
-        <div class="steps__grid">
-            <div class="steps__item"><span class="steps__number">01</span><span class="steps__text">Выбор книги в каталоге</span></div>
-            <div class="steps__item"><span class="steps__number">02</span><span class="steps__text">Добавление в корзину</span></div>
-            <div class="steps__item"><span class="steps__number">03</span><span class="steps__text">Оформление заказа</span></div>
-            <div class="steps__item"><span class="steps__number">04</span><span class="steps__text">Сборка и упаковка</span></div>
-            <div class="steps__item"><span class="steps__number">05</span><span class="steps__text">Доставка</span></div>
-            <div class="steps__item"><span class="steps__number">06</span><span class="steps__text">Гарантия и возврат</span></div>
-        </div>
+        <span class="section__label">Как взять книгу</span>
+        <h2 class="section__title">Три шага до чтения</h2>
+        <ol class="rules__list">
+            <li class="rules__item">
+                <span class="rules__number">01</span>
+                <h3 class="rules__title">Найдите книгу</h3>
+                <p class="rules__text">Воспользуйтесь поиском или фильтром по жанру. Зелёная отметка «Доступна» значит, что экземпляр свободен.</p>
+            </li>
+            <li class="rules__item">
+                <span class="rules__number">02</span>
+                <h3 class="rules__title">Приходите с билетом</h3>
+                <p class="rules__text">Библиотекарь найдёт вас по номеру читательского билета и оформит выдачу. Новый билет выдаём за пять минут.</p>
+            </li>
+            <li class="rules__item">
+                <span class="rules__number">03</span>
+                <h3 class="rules__title">Верните в срок</h3>
+                <p class="rules__text">Обычный срок — 14 дней. Дата возврата указана в журнале выдач, просроченные книги библиотекарь видит сразу.</p>
+            </li>
+        </ol>
     </div>
 </section>
-{% endblock %}
-
-{% block scripts %}
-<script src="{% static 'js/slider.js' %}"></script>
-<script src="{% static 'js/advantages.js' %}"></script>
 {% endblock %}

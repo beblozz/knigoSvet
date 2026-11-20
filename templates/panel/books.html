@@ -4,7 +4,7 @@
 <div class="panel__head">
     <div>
         <span class="section__label">Книги</span>
-        <h1 class="panel__title">Каталог: {{ books|length }} книг</h1>
+        <h1 class="panel__title">{% if search %}Найдено по запросу «{{ search }}»: {{ books|length }}{% else %}Книг в каталоге: {{ books|length }}{% endif %}</h1>
     </div>
     <a class="button" href="{% url 'panel_book_add' %}">{% include 'icons/plus.svg' %} Добавить книгу</a>
 </div>
@@ -22,8 +22,8 @@
                     <th class="table__head">Обложка</th>
                     <th class="table__head">Название</th>
                     <th class="table__head">Жанр</th>
-                    <th class="table__head table__head_right">Цена</th>
-                    <th class="table__head table__head_right">Склад</th>
+                    <th class="table__head table__head_right">В фонде</th>
+                    <th class="table__head">Наличие</th>
                     <th class="table__head table__head_right">Действия</th>
                 </tr>
             </thead>
@@ -33,17 +33,18 @@
                         <td class="table__cell">{% if book.image %}<img class="table__image" src="{{ book.image.url }}" alt="">{% endif %}</td>
                         <td class="table__cell"><a class="table__name" href="{{ book.get_absolute_url }}">{{ book.title }}</a><span class="table__sub">{{ book.author }}</span></td>
                         <td class="table__cell">{{ book.genre }}</td>
-                        <td class="table__cell table__cell_right">{{ book.price|floatformat:"0g" }} ₽</td>
-                        <td class="table__cell table__cell_right">{{ book.stock }}</td>
+                        <td class="table__cell table__cell_right">{{ book.copies }}</td>
+                        <td class="table__cell">{% include 'includes/availability.html' %}</td>
                         <td class="table__cell table__cell_right">
                             <div class="table__actions">
+                                {% if book.is_available %}<a class="table__action" href="{% url 'panel_loan_add' %}?book={{ book.id }}" title="Выдать книгу">{% include 'icons/plus.svg' %}</a>{% endif %}
                                 <a class="table__action" href="{% url 'panel_book_edit' book.id %}" title="Изменить">{% include 'icons/edit.svg' %}</a>
                                 <button class="table__action table__action_red js-delete" type="button" data-url="{% url 'panel_book_delete' book.id %}" data-title="{{ book.title }}" title="Удалить">{% include 'icons/trash.svg' %}</button>
                             </div>
                         </td>
                     </tr>
                 {% empty %}
-                    <tr class="table__row"><td class="table__cell" colspan="6">Книг не найдено</td></tr>
+                    <tr class="table__row"><td class="table__cell" colspan="6">Книг не найдено. Проверьте написание названия или фамилии автора.</td></tr>
                 {% endfor %}
             </tbody>
         </table>

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Genre, Author, Book, Review, Favorite, CallRequest
+from .models import Genre, Book, Reader, Loan
 
 
 @admin.register(Genre)
@@ -9,30 +9,21 @@ class GenreAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ['name']}
 
 
-@admin.register(Author)
-class AuthorAdmin(admin.ModelAdmin):
-    list_display = ['name']
-    search_fields = ['name']
-
-
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['title', 'author', 'genre', 'price', 'stock', 'is_new', 'is_bestseller']
-    list_filter = ['genre', 'is_new', 'is_bestseller']
-    search_fields = ['title', 'author__name']
+    list_display = ['title', 'author', 'genre', 'year', 'copies']
+    list_filter = ['genre']
+    search_fields = ['title', 'author']
     prepopulated_fields = {'slug': ['title']}
 
 
-@admin.register(Review)
-class ReviewAdmin(admin.ModelAdmin):
-    list_display = ['book', 'user', 'rating', 'created']
+@admin.register(Reader)
+class ReaderAdmin(admin.ModelAdmin):
+    list_display = ['full_name', 'card', 'phone', 'email']
+    search_fields = ['full_name', 'card', 'phone']
 
 
-@admin.register(Favorite)
-class FavoriteAdmin(admin.ModelAdmin):
-    list_display = ['user', 'book']
-
-
-@admin.register(CallRequest)
-class CallRequestAdmin(admin.ModelAdmin):
-    list_display = ['phone', 'created', 'is_done']
+@admin.register(Loan)
+class LoanAdmin(admin.ModelAdmin):
+    list_display = ['book', 'reader', 'issued', 'due', 'returned']
+    list_filter = ['returned']

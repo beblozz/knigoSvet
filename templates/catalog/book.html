@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block title %}{{ book.title }} — {{ book.author }} | КнигоСвет{% endblock %}
 
@@ -18,111 +17,43 @@
                 {% if book.image %}
                     <img class="book__image" src="{{ book.image.url }}" alt="{{ book.title }}">
                 {% endif %}
-                <div class="book__badges">
-                    {% if book.is_new %}<span class="badge badge_new">Новинка</span>{% endif %}
-                    {% if book.is_bestseller %}<span class="badge badge_best">Бестселлер</span>{% endif %}
-                    {% if book.discount %}<span class="badge badge_sale">−{{ book.discount }}%</span>{% endif %}
-                </div>
             </div>
 
             <div class="book__info">
                 <span class="section__label">{{ book.genre }}</span>
                 <h1 class="book__title">{{ book.title }}</h1>
-                <a class="book__author" href="{% url 'catalog' %}?author={{ book.author.id }}">{{ book.author }}</a>
-
-                <div class="book__rating">
-                    <span class="book__stars">{% include 'icons/star.svg' %} {% if book.rating %}{{ book.rating }}{% else %}Нет оценок{% endif %}</span>
-                    <a class="book__reviews-link" href="#reviews">Отзывов: {{ reviews|length }}</a>
-                </div>
-
+                <a class="book__author" href="{% url 'catalog' %}?q={{ book.author|urlencode }}">{{ book.author }}</a>
                 <div class="book__description">{{ book.description|linebreaks }}</div>
-
                 <dl class="book__params">
-                    <div class="book__param"><dt class="book__param-name">Издательство</dt><dd class="book__param-value">{{ book.publisher }}</dd></div>
+                    <div class="book__param"><dt class="book__param-name">Издательство</dt><dd class="book__param-value">{{ book.publisher|default:"—" }}</dd></div>
                     <div class="book__param"><dt class="book__param-name">Год издания</dt><dd class="book__param-value">{{ book.year }}</dd></div>
                     <div class="book__param"><dt class="book__param-name">Страниц</dt><dd class="book__param-value">{{ book.pages }}</dd></div>
-                    <div class="book__param"><dt class="book__param-name">Переплёт</dt><dd class="book__param-value">{{ book.get_cover_display }}</dd></div>
-                    <div class="book__param"><dt class="book__param-name">ISBN</dt><dd class="book__param-value">{{ book.isbn }}</dd></div>
-                    <div class="book__param"><dt class="book__param-name">Возраст</dt><dd class="book__param-value">{{ book.age }}</dd></div>
+                    <div class="book__param"><dt class="book__param-name">ISBN</dt><dd class="book__param-value">{{ book.isbn|default:"—" }}</dd></div>
                 </dl>
             </div>
 
             <aside class="book__buy">
-                <div class="book__prices">
-                    <span class="book__price">{{ book.price|floatformat:"0g" }} ₽</span>
-                    {% if book.discount %}<span class="book__old">{{ book.old_price|floatformat:"0g" }} ₽</span>{% endif %}
-                </div>
-                {% if book.stock > 0 %}
-                    <p class="book__stock">В наличии: {{ book.stock }} шт.</p>
-                    <button class="button button_wide js-cart-add" type="button" data-url="{% url 'cart_add' book.id %}">Добавить в корзину</button>
-                {% else %}
-                    <p class="book__stock book__stock_out">Нет в наличии</p>
+                <span class="book__aside-title">Наличие в библиотеке</span>
+                {% include 'includes/availability.html' %}
+                <dl class="book__copies">
+                    <div class="book__copy"><dt>Экземпляров в фонде</dt><dd>{{ book.copies }}</dd></div>
+                    <div class="book__copy"><dt>Свободно</dt><dd>{{ book.available }}</dd></div>
+                    <div class="book__copy"><dt>На руках</dt><dd>{{ book.on_hands }}</dd></div>
+                </dl>
+                {% if not book.is_available and nearest %}
+                    <p class="book__hint">Ближайший возврат ожидается {{ nearest.due|date:"j E" }}.</p>
                 {% endif %}
-                <button class="button button_outline button_wide book__favorite {% if is_favorite %}book__favorite_active{% endif %} js-favorite" type="button" data-url="{% url 'favorite_toggle' book.id %}" data-text="1">{% if is_favorite %}В избранном{% else %}В избранное{% endif %}</button>
                 <ul class="book__notes">
-                    <li class="book__note">Самовывоз — бесплатно</li>
-                    <li class="book__note">Курьером — от 1 дня</li>
-                    <li class="book__note">Возврат в течение 14 дней</li>
+                    <li class="book__note">Выдача по читательскому билету</li>
+                    <li class="book__note">Срок пользования — 14 дней</li>
+                    <li class="book__note">Пн–Сб с 10:00 до 20:00</li>
                 </ul>
             </aside>
         </div>
 
-        <div class="reviews" id="reviews">
-            <h2 class="reviews__title">Отзывы читателей</h2>
-            <div class="reviews__layout">
-                <div class="reviews__list">
-                    {% for review in reviews %}
-                        <article class="reviews__item">
-                            <div class="reviews__head">
-                                <span class="reviews__avatar">{{ review.user.username|slice:":1"|upper }}</span>
-                                <div class="reviews__user">
-                                    <span class="reviews__name">{% if review.user.first_name %}{{ review.user.first_name }}{% else %}{{ review.user.username }}{% endif %}</span>
-                                    <span class="reviews__date">{{ review.created|date:"d E Y" }}</span>
-                                </div>
-                                <span class="reviews__rating">{% include 'icons/star.svg' %} {{ review.rating }}</span>
-                            </div>
-                            <p class="reviews__text">{{ review.text }}</p>
-                            {% if review.user == user %}
-                                <form class="reviews__delete" action="{% url 'review_delete' review.id %}" method="post">
-                                    {% csrf_token %}
-                                    <button class="reviews__delete-button" type="submit">Удалить отзыв</button>
-                                </form>
-                            {% endif %}
-                        </article>
-                    {% empty %}
-                        <p class="reviews__empty">Пока никто не оставил отзыв. Будьте первым!</p>
-                    {% endfor %}
-                </div>
-
-                <div class="reviews__form">
-                    {% if user.is_authenticated %}
-                        <form class="form" method="post">
-                            {% csrf_token %}
-                            <h3 class="form__title">Оставить отзыв</h3>
-                            <label class="form__field">
-                                <span class="form__label">Оценка</span>
-                                {{ form.rating }}
-                            </label>
-                            <label class="form__field">
-                                <span class="form__label">Отзыв</span>
-                                {{ form.text }}
-                            </label>
-                            <button class="button" type="submit">Отправить</button>
-                        </form>
-                    {% else %}
-                        <div class="form">
-                            <h3 class="form__title">Оставить отзыв</h3>
-                            <p class="form__hint">Отзывы могут оставлять только зарегистрированные читатели</p>
-                            <a class="button" href="{% url 'login' %}?next={{ book.get_absolute_url }}">Войти</a>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-
         {% if similar %}
             <div class="book__similar">
-                <h2 class="reviews__title">Похожие книги</h2>
+                <h2 class="section__title">Ещё в жанре «{{ book.genre }}»</h2>
                 <div class="catalog__grid catalog__grid_four">
                     {% for book in similar %}
                         {% include 'includes/book_card.html' %}

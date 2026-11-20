@@ -11,7 +11,7 @@
             <span class="breadcrumbs__current">Каталог</span>
         </nav>
         <span class="section__label">Каталог</span>
-        <h1 class="section__title">Все книги магазина</h1>
+        <h1 class="section__title">Книги библиотечного фонда</h1>
 
         <form class="catalog__layout" id="filter-form" method="get">
             <aside class="filter" id="filter">
@@ -32,37 +32,16 @@
                         <label class="filter__option">
                             <input class="filter__radio" type="radio" name="genre" value="{{ genre.slug }}" {% if genre.slug == genre_slug %}checked{% endif %}>
                             <span class="filter__name">{{ genre.name }}</span>
-                            <span class="filter__count">{{ genre.books.count }}</span>
+                            <span class="filter__count">{{ genre.count }}</span>
                         </label>
                     {% endfor %}
                 </div>
 
                 <div class="filter__group">
-                    <span class="filter__title">Автор</span>
-                    <select class="form__input" name="author">
-                        <option value="">Все авторы</option>
-                        {% for author in authors %}
-                            <option value="{{ author.id }}" {% if author.id|stringformat:"s" == author_id %}selected{% endif %}>{{ author.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-
-                <div class="filter__group">
-                    <span class="filter__title">Цена, ₽</span>
-                    <div class="filter__prices">
-                        <input class="form__input" type="number" name="price_min" value="{{ price_min }}" placeholder="от" min="0">
-                        <input class="form__input" type="number" name="price_max" value="{{ price_max }}" placeholder="до" min="0">
-                    </div>
-                </div>
-
-                <div class="filter__group">
+                    <span class="filter__title">Наличие</span>
                     <label class="filter__option">
-                        <input class="filter__radio" type="checkbox" name="in_stock" value="1" {% if in_stock %}checked{% endif %}>
-                        <span class="filter__name">Только в наличии</span>
-                    </label>
-                    <label class="filter__option">
-                        <input class="filter__radio" type="checkbox" name="new" value="1" {% if only_new %}checked{% endif %}>
-                        <span class="filter__name">Только новинки</span>
+                        <input class="filter__radio" type="checkbox" name="free" value="1" {% if free %}checked{% endif %}>
+                        <span class="filter__name">Только доступные сейчас</span>
                     </label>
                 </div>
 
@@ -72,15 +51,15 @@
 
             <div class="catalog__content">
                 <div class="catalog__top">
-                    <p class="catalog__total">Найдено книг: <b>{{ total }}</b></p>
+                    <p class="catalog__total">Найдено книг: <b>{{ total }}</b>{% if search %} по запросу «{{ search }}»{% endif %}</p>
                     <button class="catalog__filter-button" id="filter-button" type="button">{% include 'icons/filter.svg' %} Фильтры</button>
                     <label class="catalog__sort">
                         <span class="catalog__sort-text">Сортировать:</span>
                         <select class="form__input form__input_small" name="sort" id="sort">
-                            <option value="new" {% if sort == 'new' %}selected{% endif %}>Сначала новые</option>
-                            <option value="cheap" {% if sort == 'cheap' %}selected{% endif %}>Сначала дешёвые</option>
-                            <option value="expensive" {% if sort == 'expensive' %}selected{% endif %}>Сначала дорогие</option>
+                            <option value="new" {% if sort == 'new' %}selected{% endif %}>Сначала новые поступления</option>
                             <option value="title" {% if sort == 'title' %}selected{% endif %}>По названию</option>
+                            <option value="author" {% if sort == 'author' %}selected{% endif %}>По автору</option>
+                            <option value="year" {% if sort == 'year' %}selected{% endif %}>По году издания</option>
                         </select>
                     </label>
                 </div>
@@ -94,7 +73,7 @@
                 {% else %}
                     <div class="empty">
                         <p class="empty__title">Ничего не нашлось</p>
-                        <p class="empty__text">Попробуйте изменить запрос или сбросить фильтры</p>
+                        <p class="empty__text">Проверьте написание или поищите только по фамилии автора</p>
                         <a class="button" href="{% url 'catalog' %}">Сбросить фильтры</a>
                     </div>
                 {% endif %}

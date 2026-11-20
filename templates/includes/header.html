@@ -2,17 +2,12 @@
 <header class="header">
     <div class="container header__inner">
         <div class="header__social">
-            <div class="header__social-list">
-                <a class="header__social-link" href="https://vk.com" target="_blank" rel="noopener">VK</a>
-                <a class="header__social-link" href="https://t.me" target="_blank" rel="noopener">TG</a>
-                <a class="header__social-link" href="https://github.com/beblozz/knigoSvet" target="_blank" rel="noopener">GIT</a>
-            </div>
-            <span class="header__social-text">Мы в социальных сетях</span>
+            <span class="header__social-text">Электронный каталог<br>библиотеки</span>
         </div>
 
         <nav class="header__nav header__nav_left">
-            <a class="header__link" href="{% url 'home' %}#about">О нас</a>
             <a class="header__link" href="{% url 'catalog' %}">Каталог</a>
+            <a class="header__link" href="{% url 'home' %}#genres">Жанры</a>
         </nav>
 
         <a class="header__logo" href="{% url 'home' %}">
@@ -20,34 +15,28 @@
         </a>
 
         <nav class="header__nav header__nav_right">
-            <a class="header__link" href="{% url 'home' %}#bestsellers">Бестселлеры</a>
-            <a class="header__link" href="{% url 'home' %}#steps">Этапы</a>
+            <a class="header__link" href="{% url 'home' %}#new">Новые поступления</a>
+            <a class="header__link" href="{% url 'home' %}#rules">Как взять книгу</a>
         </nav>
 
         <div class="header__side">
             <div class="header__contacts">
                 <a class="header__phone" href="tel:+74951234567">+7 (495) 123 45 67</a>
-                <a class="header__call" href="#call">Заказать звонок</a>
+                <span class="header__call">Пн–Сб, 10:00–20:00</span>
             </div>
             <div class="header__actions">
-                {% if user.is_staff %}
-                    <a class="header__action" href="{% url 'panel' %}" title="Панель управления">{% include 'icons/chart.svg' %}</a>
-                {% endif %}
-                <a class="header__action" href="{% if user.is_authenticated %}{% url 'profile' %}{% else %}{% url 'login' %}{% endif %}" title="Личный кабинет">{% include 'icons/user.svg' %}</a>
-                <a class="header__action" href="{% url 'cart' %}" title="Корзина">
-                    {% include 'icons/cart.svg' %}
-                    <span class="header__count {% if cart_count == 0 %}header__count_hidden{% endif %}" id="cart-count">{{ cart_count }}</span>
-                </a>
+                <a class="header__action" href="{% url 'catalog' %}" title="Поиск книг">{% include 'icons/search.svg' %}</a>
+                <a class="header__action" href="{% url 'panel' %}" title="Раздел библиотекаря">{% include 'icons/user.svg' %}</a>
                 <button class="header__burger" id="burger" type="button" aria-label="Меню">{% include 'icons/menu.svg' %}</button>
             </div>
         </div>
     </div>
 
     <nav class="header__mobile" id="mobile-menu">
-        <a class="header__mobile-link" href="{% url 'home' %}#about">О нас</a>
         <a class="header__mobile-link" href="{% url 'catalog' %}">Каталог</a>
-        <a class="header__mobile-link" href="{% url 'home' %}#bestsellers">Бестселлеры</a>
-        <a class="header__mobile-link" href="{% url 'home' %}#steps">Этапы</a>
-        <a class="header__mobile-link" href="tel:+74951234567">+7 (495) 123 45 67</a>
+        <a class="header__mobile-link" href="{% url 'home' %}#genres">Жанры</a>
+        <a class="header__mobile-link" href="{% url 'home' %}#new">Новые поступления</a>
+        <a class="header__mobile-link" href="{% url 'home' %}#rules">Как взять книгу</a>
+        <a class="header__mobile-link" href="{% url 'panel' %}">Раздел библиотекаря</a>
     </nav>
 </header>

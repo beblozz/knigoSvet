@@ -522,3 +522,195 @@ a.rows__name:hover {
         align-items: flex-start;
     }
 }
+
+.panel__buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.panel__card_narrow,
+.panel__form_narrow {
+    max-width: 620px;
+}
+
+.stats__item_alert {
+    background: var(--red);
+    border-color: var(--red);
+}
+
+.stats__item_alert .stats__name,
+.stats__item_alert .stats__value,
+.stats__item_alert .stats__note {
+    color: var(--white);
+}
+
+.table__card {
+    font-weight: 700;
+    color: var(--navy);
+    white-space: nowrap;
+}
+
+.table__nowrap {
+    white-space: nowrap;
+}
+
+/* Неделя 3: журнал выдач */
+.stats__item_link {
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.stats__item_link:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+}
+
+.panel__card_gap {
+    margin-top: 24px;
+}
+
+.panel__head_small {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.panel__more {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold-dark);
+}
+
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.tabs__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    transition: border-color 0.2s;
+}
+
+.tabs__item b {
+    min-width: 24px;
+    padding: 1px 7px;
+    font-size: 12px;
+    text-align: center;
+    background: var(--surface);
+    border-radius: 100px;
+}
+
+.tabs__item:hover {
+    border-color: var(--navy);
+}
+
+.tabs__item_active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--white);
+}
+
+.tabs__item_active b {
+    background: var(--gold);
+    color: var(--navy);
+}
+
+.tabs__item_red b {
+    background: var(--red);
+    color: var(--white);
+}
+
+.table__row_overdue {
+    background: #fbe9e7;
+}
+
+.table__row_overdue:hover {
+    background: #f7dcd8;
+}
+
+.table__row_overdue .table__cell:first-child {
+    box-shadow: inset 4px 0 0 var(--red);
+}
+
+.table__cell_red {
+    font-weight: 700;
+    color: var(--red);
+}
+
+.status_done {
+    background: var(--surface);
+    color: var(--muted);
+}
+
+@media (max-width: 700px) {
+    .table_loans thead {
+        display: none;
+    }
+
+    .table_loans,
+    .table_loans tbody,
+    .table_loans .table__row,
+    .table_loans .table__cell {
+        display: block;
+        width: 100%;
+    }
+
+    .table_loans .table__row {
+        margin-bottom: 12px;
+        padding: 6px 4px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+    }
+
+    .table_loans .table__row_overdue {
+        box-shadow: inset 4px 0 0 var(--red);
+    }
+
+    .table_loans .table__row_overdue .table__cell:first-child {
+        box-shadow: none;
+    }
+
+    .table_loans .table__cell {
+        padding: 6px 12px;
+        border: none;
+        text-align: left;
+    }
+
+    .table_loans .table__cell[data-label="Выдана"],
+    .table_loans .table__cell[data-label="Вернуть до"] {
+        display: inline-block;
+        width: auto;
+    }
+
+    .table_loans .table__cell[data-label="Выдана"]::before {
+        content: 'выдана ';
+        color: var(--muted);
+    }
+
+    .table_loans .table__cell[data-label="Вернуть до"]::before {
+        content: 'вернуть до ';
+        color: var(--muted);
+        font-weight: 400;
+    }
+
+    .table_loans .button {
+        width: 100%;
+        min-height: 44px;
+    }
+
+    .tabs__item {
+        flex: 1 1 45%;
+        justify-content: space-between;
+    }
+}

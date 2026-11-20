@@ -1,0 +1,7 @@
+{% with free=book.available %}
+    {% if free > 0 %}
+        <span class="status status_free">Доступна{% if book.copies > 1 %} · {{ free }} из {{ book.copies }}{% endif %}</span>
+    {% else %}
+        <span class="status status_busy">На руках</span>
+    {% endif %}
+{% endwith %}

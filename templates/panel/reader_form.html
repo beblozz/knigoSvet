@@ -1,0 +1,51 @@
+{% extends 'panel/base.html' %}
+
+{% block content %}
+<div class="panel__head">
+    <div>
+        <span class="section__label">Читатели</span>
+        <h1 class="panel__title">{{ title }}</h1>
+    </div>
+    <a class="button button_outline" href="{% url 'panel_readers' %}">Назад к списку</a>
+</div>
+
+<form class="form panel__form panel__form_narrow" method="post" novalidate>
+    {% csrf_token %}
+    <div class="form__ticket">
+        <span class="form__ticket-label">Читательский билет</span>
+        <span class="form__ticket-number">{{ card }}</span>
+        {% if not reader %}<span class="form__ticket-note">номер присвоится автоматически</span>{% endif %}
+    </div>
+    {% for error in form.non_field_errors %}
+        <span class="form__error form__error_block">{{ error }}</span>
+    {% endfor %}
+    {% include 'includes/field.html' with field=form.full_name required=True %}
+    <div class="form__row">
+        {% include 'includes/field.html' with field=form.phone required=True %}
+        {% include 'includes/field.html' with field=form.email %}
+    </div>
+    <p class="form__note">* — обязательные поля. Почта нужна, чтобы позже отправлять напоминания о сроке возврата.</p>
+    <button class="button" type="submit">{% if reader %}Сохранить{% else %}Записать читателя{% endif %}</button>
+</form>
+
+{% if reader %}
+<section class="panel__card panel__card_narrow panel__card_gap">
+    <div class="panel__head panel__head_small">
+        <h2 class="panel__card-title">Книги читателя</h2>
+        <a class="button button_small" href="{% url 'panel_loan_add' %}?reader={{ reader.id }}">{% include 'icons/plus.svg' %} Выдать книгу</a>
+    </div>
+    <ul class="rows">
+        {% for loan in reader_loans %}
+            <li class="rows__item">
+                <span class="rows__name">{{ loan.book.title }}<span class="table__sub">выдана {{ loan.issued|date:"d.m.Y" }}, вернуть до {{ loan.due|date:"d.m.Y" }}</span></span>
+                {% if loan.returned %}<span class="status status_done">Возвращена</span>
+                {% elif loan.is_overdue %}<span class="status status_overdue">Просрочено {{ loan.days_overdue }} дн.</span>
+                {% else %}<span class="status status_free">На руках</span>{% endif %}
+            </li>
+        {% empty %}
+            <li class="rows__item">Читатель ещё не брал книги</li>
+        {% endfor %}
+    </ul>
+</section>
+{% endif %}
+{% endblock %}

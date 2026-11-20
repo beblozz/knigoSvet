@@ -1,0 +1,24 @@
+{% extends 'panel/base.html' %}
+
+{% block content %}
+<div class="panel__head">
+    <div>
+        <span class="section__label">Справочник</span>
+        <h1 class="panel__title">Жанры</h1>
+    </div>
+</div>
+
+<section class="panel__card panel__card_narrow">
+    <form class="panel__search" method="post">
+        {% csrf_token %}
+        {{ form.name }}
+        <button class="button" type="submit">Добавить</button>
+    </form>
+    {% for error in form.name.errors %}<span class="form__error">{{ error }}</span>{% endfor %}
+    <ul class="rows">
+        {% for genre in genres %}
+            <li class="rows__item"><span class="rows__name">{{ genre.name }}</span><span class="rows__value">{{ genre.count }} кн.</span></li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

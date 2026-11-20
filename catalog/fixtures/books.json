@@ -1,816 +1,488 @@
 [
-{
-  "model": "catalog.genre",
-  "pk": 1,
-  "fields": {
-    "name": "Классика",
-    "slug": "klassika",
-    "description": "Проверенные временем романы и поэзия"
+  {
+    "model": "catalog.genre",
+    "pk": 1,
+    "fields": {
+      "name": "Классика",
+      "slug": "klassika",
+      "description": "Проверенные временем романы и поэзия"
+    }
+  },
+  {
+    "model": "catalog.genre",
+    "pk": 2,
+    "fields": {
+      "name": "Современная проза",
+      "slug": "sovremennaya-proza",
+      "description": "Главные романы последних лет"
+    }
+  },
+  {
+    "model": "catalog.genre",
+    "pk": 3,
+    "fields": {
+      "name": "Фантастика и фэнтези",
+      "slug": "fantastika",
+      "description": "Другие миры и будущее"
+    }
+  },
+  {
+    "model": "catalog.genre",
+    "pk": 4,
+    "fields": {
+      "name": "Детективы",
+      "slug": "detektivy",
+      "description": "Загадки, которые не отпускают до последней страницы"
+    }
+  },
+  {
+    "model": "catalog.genre",
+    "pk": 5,
+    "fields": {
+      "name": "Нон-фикшн",
+      "slug": "non-fikshn",
+      "description": "Наука, психология и саморазвитие"
+    }
+  },
+  {
+    "model": "catalog.genre",
+    "pk": 6,
+    "fields": {
+      "name": "Детские книги",
+      "slug": "detskie",
+      "description": "Истории для семейного чтения"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 1,
+    "fields": {
+      "title": "Мастер и Маргарита",
+      "slug": "master-i-margarita",
+      "author": "Михаил Булгаков",
+      "genre": 1,
+      "description": "В Москву тридцатых годов приезжает загадочный профессор Воланд со своей свитой, и привычная жизнь столицы переворачивается.\nИстория любви Мастера и Маргариты переплетается с романом о Понтии Пилате. Одна из самых читаемых книг XX века, в которой сатира соседствует с философской притчей.",
+      "image": "books/master-i-margarita.webp",
+      "publisher": "АСТ",
+      "year": 2023,
+      "pages": 512,
+      "isbn": "978-5-17-149175-8",
+      "created": "2026-09-09T22:27:41.417Z",
+      "copies": 3
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 2,
+    "fields": {
+      "title": "Преступление и наказание",
+      "slug": "prestuplenie-i-nakazanie",
+      "author": "Фёдор Достоевский",
+      "genre": 1,
+      "description": "Бывший студент Родион Раскольников решается на убийство, чтобы проверить собственную теорию о «праве сильного».\nРоман о том, что происходит с человеком после преступления: муки совести, страх и долгий путь к раскаянию.",
+      "image": "books/prestuplenie-i-nakazanie.webp",
+      "publisher": "АСТ",
+      "year": 2022,
+      "pages": 672,
+      "isbn": "978-5-17-090630-7",
+      "created": "2026-09-10T22:27:41.417Z",
+      "copies": 2
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 3,
+    "fields": {
+      "title": "Анна Каренина",
+      "slug": "anna-karenina",
+      "author": "Лев Толстой",
+      "genre": 1,
+      "description": "Замужняя петербургская дама влюбляется в блестящего офицера Вронского и идёт против правил высшего света.\nПараллельно развивается история Левина и Кити. Роман о семье, любви и цене, которую приходится платить за свободу.",
+      "image": "books/anna-karenina.webp",
+      "publisher": "АСТ",
+      "year": 2022,
+      "pages": 864,
+      "isbn": "978-5-17-087888-8",
+      "created": "2026-09-11T22:27:41.417Z",
+      "copies": 1
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 4,
+    "fields": {
+      "title": "Евгений Онегин",
+      "slug": "evgeniy-onegin",
+      "author": "Александр Пушкин",
+      "genre": 1,
+      "description": "Роман в стихах о скучающем столичном дворянине, который отвергает любовь Татьяны Лариной и слишком поздно понимает свою ошибку.\nВ издание также вошли «Борис Годунов» и «Маленькие трагедии».",
+      "image": "books/evgeniy-onegin.webp",
+      "publisher": "Азбука",
+      "year": 2021,
+      "pages": 448,
+      "isbn": "978-5-389-08846-7",
+      "created": "2026-09-12T22:27:41.417Z",
+      "copies": 4
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 5,
+    "fields": {
+      "title": "Зулейха открывает глаза",
+      "slug": "zuleyha-otkryvaet-glaza",
+      "author": "Гузель Яхина",
+      "genre": 2,
+      "description": "Зима 1930 года. Крестьянку Зулейху вместе с сотнями других переселенцев отправляют из татарской деревни в Сибирь.\nНа берегу Ангары ей предстоит выжить, вырастить сына и впервые почувствовать себя свободной.",
+      "image": "books/zuleyha-otkryvaet-glaza.webp",
+      "publisher": "АСТ",
+      "year": 2020,
+      "pages": 512,
+      "isbn": "978-5-17-090436-5",
+      "created": "2026-09-13T22:27:41.417Z",
+      "copies": 2
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 6,
+    "fields": {
+      "title": "Петровы в гриппе и вокруг него",
+      "slug": "petrovy-v-grippe",
+      "author": "Алексей Сальников",
+      "genre": 2,
+      "description": "Автослесарь Петров, его жена-библиотекарь и сын болеют гриппом накануне Нового года. Чем выше температура, тем труднее отличить реальность от бреда.\nСмешной и странный роман о жизни обычной екатеринбургской семьи.",
+      "image": "books/petrovy-v-grippe.webp",
+      "publisher": "АСТ",
+      "year": 2019,
+      "pages": 416,
+      "isbn": "978-5-17-106570-6",
+      "created": "2026-09-14T22:27:41.417Z",
+      "copies": 3
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 7,
+    "fields": {
+      "title": "Имя розы",
+      "slug": "imya-rozy",
+      "author": "Умберто Эко",
+      "genre": 2,
+      "description": "1327 год. В богатом итальянском аббатстве один за другим погибают монахи. Расследовать смерти берётся францисканец Вильгельм Баскервильский со своим учеником Адсоном.\nИсторический детектив, в котором следы ведут в огромную монастырскую библиотеку.",
+      "image": "books/imya-rozy.webp",
+      "publisher": "Corpus",
+      "year": 2022,
+      "pages": 672,
+      "isbn": "978-5-17-082694-0",
+      "created": "2026-09-15T22:27:41.417Z",
+      "copies": 1
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 8,
+    "fields": {
+      "title": "Пикник на обочине",
+      "slug": "piknik-na-obochine",
+      "author": "Аркадий и Борис Стругацкие",
+      "genre": 3,
+      "description": "После Посещения на Земле остались Зоны — места, где не работают привычные законы физики. Сталкеры тайком выносят оттуда опасные артефакты.\nИстория Рэдрика Шухарта, который идёт за Золотым шаром, исполняющим желания.",
+      "image": "books/piknik-na-obochine.webp",
+      "publisher": "АСТ",
+      "year": 2022,
+      "pages": 256,
+      "isbn": "978-5-17-088647-0",
+      "created": "2026-09-16T22:27:41.417Z",
+      "copies": 2
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 9,
+    "fields": {
+      "title": "1984",
+      "slug": "1984",
+      "author": "Джордж Оруэлл",
+      "genre": 3,
+      "description": "Уинстон Смит работает в Министерстве правды и каждый день переписывает прошлое. Он живёт под постоянным наблюдением Большого Брата и всё же решается на собственные мысли.\nГлавная антиутопия XX века в новом переводе.",
+      "image": "books/1984.webp",
+      "publisher": "АСТ",
+      "year": 2023,
+      "pages": 320,
+      "isbn": "978-5-17-148844-4",
+      "created": "2026-09-17T22:27:41.417Z",
+      "copies": 3
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 10,
+    "fields": {
+      "title": "Дюна",
+      "slug": "dyuna",
+      "author": "Фрэнк Герберт",
+      "genre": 3,
+      "description": "Пустынная планета Арракис — единственный источник пряности, самого ценного вещества во Вселенной. Юный Пол Атрейдес теряет дом и находит союзников среди фрименов.\nМасштабная сага о власти, экологии и вере.",
+      "image": "books/dyuna.webp",
+      "publisher": "АСТ",
+      "year": 2023,
+      "pages": 704,
+      "isbn": "978-5-17-151432-7",
+      "created": "2026-09-18T22:27:41.417Z",
+      "copies": 2
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 11,
+    "fields": {
+      "title": "Убийство в «Восточном экспрессе»",
+      "slug": "ubiystvo-v-vostochnom-ekspresse",
+      "author": "Агата Кристи",
+      "genre": 4,
+      "description": "Поезд застрял в снежных заносах, а в купе найден убитый пассажир. Преступник всё ещё в вагоне.\nЭркюлю Пуаро предстоит опросить двенадцать подозреваемых, у каждого из которых есть алиби.",
+      "image": "books/ubiystvo-v-vostochnom-ekspresse.webp",
+      "publisher": "Эксмо",
+      "year": 2026,
+      "pages": 320,
+      "isbn": "978-5-04-099247-8",
+      "created": "2026-09-19T22:27:41.417Z",
+      "copies": 1
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 12,
+    "fields": {
+      "title": "Собака Баскервилей",
+      "slug": "sobaka-baskerviley",
+      "author": "Артур Конан Дойл",
+      "genre": 4,
+      "description": "Над родом Баскервилей висит старинное проклятие: на болотах Девоншира по ночам видят чудовищного пса.\nШерлок Холмс и доктор Ватсон выясняют, кто стоит за легендой и кому выгодна смерть наследника.",
+      "image": "books/sobaka-baskerviley.webp",
+      "publisher": "Эксмо",
+      "year": 2026,
+      "pages": 256,
+      "isbn": "978-5-04-248946-4",
+      "created": "2026-09-20T22:27:41.417Z",
+      "copies": 2
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 13,
+    "fields": {
+      "title": "Десять негритят",
+      "slug": "desyat-negrityat",
+      "author": "Агата Кристи",
+      "genre": 4,
+      "description": "Десять незнакомых людей получают приглашение на уединённый остров. Хозяин не появляется, а гости начинают погибать один за другим — в точности по детской считалке.\nСамый продаваемый детектив в истории.",
+      "image": "books/desyat-negrityat.webp",
+      "publisher": "Эксмо",
+      "year": 2026,
+      "pages": 288,
+      "isbn": "978-5-04-103497-9",
+      "created": "2026-09-21T22:27:41.417Z",
+      "copies": 4
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 14,
+    "fields": {
+      "title": "Девушка с татуировкой дракона",
+      "slug": "devushka-s-tatuirovkoy-drakona",
+      "author": "Стиг Ларссон",
+      "genre": 4,
+      "description": "Журналист Микаэль Блумквист расследует исчезновение девушки, которая пропала сорок лет назад. Ему помогает Лисбет Саландер — гениальный хакер с тяжёлым характером.\nПервый роман трилогии «Миллениум».",
+      "image": "books/devushka-s-tatuirovkoy-drakona.webp",
+      "publisher": "Эксмо",
+      "year": 2025,
+      "pages": 624,
+      "isbn": "978-5-04-173910-2",
+      "created": "2026-09-22T22:27:41.417Z",
+      "copies": 2
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 15,
+    "fields": {
+      "title": "Sapiens. Краткая история человечества",
+      "slug": "sapiens",
+      "author": "Юваль Ной Харари",
+      "genre": 5,
+      "description": "Сто тысяч лет назад Homo sapiens был одним из нескольких видов людей. Как он подчинил себе планету?\nИсторик Юваль Харари рассказывает о трёх революциях — когнитивной, аграрной и научной — и о том, как они изменили наш мир.",
+      "image": "books/sapiens.webp",
+      "publisher": "Синдбад",
+      "year": 2023,
+      "pages": 512,
+      "isbn": "978-5-00131-372-4",
+      "created": "2026-09-23T22:27:41.417Z",
+      "copies": 1
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 16,
+    "fields": {
+      "title": "Думай медленно… решай быстро",
+      "slug": "dumay-medlenno-reshay-bystro",
+      "author": "Даниэль Канеман",
+      "genre": 5,
+      "description": "Нобелевский лауреат объясняет, почему мы принимаем нерациональные решения. В нашей голове работают две системы: быстрая интуитивная и медленная логическая.\nКнига учит замечать ловушки мышления и не доверять первому впечатлению.",
+      "image": "books/dumay-medlenno-reshay-bystro.webp",
+      "publisher": "АСТ",
+      "year": 2021,
+      "pages": 656,
+      "isbn": "978-5-17-080053-7",
+      "created": "2026-09-24T22:27:41.417Z",
+      "copies": 3
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 17,
+    "fields": {
+      "title": "Краткая история времени",
+      "slug": "kratkaya-istoriya-vremeni",
+      "author": "Стивен Хокинг",
+      "genre": 5,
+      "description": "Откуда взялась Вселенная и что её ждёт? Что такое чёрные дыры и куда течёт время?\nСтивен Хокинг рассказывает о самых сложных вопросах физики понятным языком и почти без формул.",
+      "image": "books/kratkaya-istoriya-vremeni.webp",
+      "publisher": "АСТ",
+      "year": 2023,
+      "pages": 272,
+      "isbn": "978-5-17-152860-7",
+      "created": "2026-09-25T22:27:41.417Z",
+      "copies": 2
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 18,
+    "fields": {
+      "title": "Маленький принц",
+      "slug": "malenkiy-princ",
+      "author": "Антуан де Сент-Экзюпери",
+      "genre": 6,
+      "description": "Лётчик терпит аварию в пустыне и встречает мальчика с далёкой планеты.\nСказка-притча о дружбе, любви и ответственности за тех, кого приручил. С рисунками автора.",
+      "image": "books/malenkiy-princ.webp",
+      "publisher": "Эксмо",
+      "year": 2026,
+      "pages": 112,
+      "isbn": "978-5-699-94326-5",
+      "created": "2026-09-26T22:27:41.417Z",
+      "copies": 2
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 19,
+    "fields": {
+      "title": "Денискины рассказы",
+      "slug": "deniskiny-rasskazy",
+      "author": "Виктор Драгунский",
+      "genre": 6,
+      "description": "Весёлые истории о Дениске Кораблёве и его друге Мишке: про манную кашу за окном, про тайное, которое становится явным, и про многое другое.\nКнига входит в список внеклассного чтения.",
+      "image": "books/deniskiny-rasskazy.webp",
+      "publisher": "Эксмо",
+      "year": 2026,
+      "pages": 160,
+      "isbn": "978-5-04-166674-3",
+      "created": "2026-09-27T22:27:41.417Z",
+      "copies": 1
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 20,
+    "fields": {
+      "title": "Приключения Незнайки и его друзей",
+      "slug": "priklyucheniya-neznayki",
+      "author": "Николай Носов",
+      "genre": 6,
+      "description": "В Цветочном городе живут коротышки, и самый известный из них — Незнайка. Он берётся за всё подряд и постоянно попадает в смешные истории.\nА потом вместе с друзьями отправляется в путешествие на воздушном шаре.",
+      "image": "books/priklyucheniya-neznayki.webp",
+      "publisher": "Махаон",
+      "year": 2026,
+      "pages": 208,
+      "isbn": "978-5-389-25601-9",
+      "created": "2026-09-28T22:27:41.417Z",
+      "copies": 3
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 21,
+    "fields": {
+      "title": "Волшебник Изумрудного города",
+      "slug": "volshebnik-izumrudnogo-goroda",
+      "author": "Александр Волков",
+      "genre": 6,
+      "description": "Ураган уносит домик с девочкой Элли и пёсиком Тотошкой в Волшебную страну. Чтобы вернуться домой, нужно дойти до Изумрудного города по дороге из жёлтого кирпича.\nВ пути Элли находит друзей: Страшилу, Железного Дровосека и Трусливого Льва.",
+      "image": "books/volshebnik-izumrudnogo-goroda.webp",
+      "publisher": "АСТ",
+      "year": 2024,
+      "pages": 224,
+      "isbn": "978-5-17-162242-8",
+      "created": "2026-09-29T22:27:41.417Z",
+      "copies": 2
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 22,
+    "fields": {
+      "title": "Атомные привычки",
+      "slug": "atomnye-privychki",
+      "author": "Джеймс Клир",
+      "genre": 5,
+      "description": "Большие перемены складываются из маленьких шагов. Джеймс Клир показывает, как улучшаться на один процент каждый день.\nПростая система из четырёх правил помогает закрепить полезные привычки и избавиться от вредных.",
+      "image": "books/atomnye-privychki.webp",
+      "publisher": "Питер",
+      "year": 2026,
+      "pages": 304,
+      "isbn": "978-5-4461-4117-3",
+      "created": "2026-09-30T22:27:41.417Z",
+      "copies": 1
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 23,
+    "fields": {
+      "title": "Хоббит",
+      "slug": "hobbit",
+      "author": "Джон Р. Р. Толкин",
+      "genre": 3,
+      "description": "Хоббит Бильбо Бэггинс любит уют и вкусный завтрак, но однажды на пороге появляются волшебник Гэндальф и тринадцать гномов.\nВпереди дорога к Одинокой горе, дракон Смауг и находка, которая изменит судьбу Средиземья. Перевод Н. Рахмановой.",
+      "image": "books/hobbit.webp",
+      "publisher": "АСТ",
+      "year": 2022,
+      "pages": 320,
+      "isbn": "978-5-17-145371-8",
+      "created": "2026-10-01T22:27:41.417Z",
+      "copies": 2
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 24,
+    "fields": {
+      "title": "Авиатор",
+      "slug": "aviator",
+      "author": "Евгений Водолазкин",
+      "genre": 2,
+      "description": "Герой просыпается в больничной палате и не помнит о себе ничего. По совету врача он начинает записывать обрывки воспоминаний: Петербург начала века, дача, первая любовь, Соловки.\nРоман о памяти, вине и о том, из чего на самом деле состоит история.",
+      "image": "books/aviator.webp",
+      "publisher": "АСТ",
+      "year": 2021,
+      "pages": 416,
+      "isbn": "978-5-17-096655-4",
+      "created": "2026-10-02T22:27:41.417Z",
+      "copies": 3
+    }
   }
-},
-{
-  "model": "catalog.genre",
-  "pk": 2,
-  "fields": {
-    "name": "Современная проза",
-    "slug": "sovremennaya-proza",
-    "description": "Главные романы последних лет"
-  }
-},
-{
-  "model": "catalog.genre",
-  "pk": 3,
-  "fields": {
-    "name": "Фантастика и фэнтези",
-    "slug": "fantastika",
-    "description": "Другие миры и будущее"
-  }
-},
-{
-  "model": "catalog.genre",
-  "pk": 4,
-  "fields": {
-    "name": "Детективы",
-    "slug": "detektivy",
-    "description": "Загадки, которые не отпускают до последней страницы"
-  }
-},
-{
-  "model": "catalog.genre",
-  "pk": 5,
-  "fields": {
-    "name": "Нон-фикшн",
-    "slug": "non-fikshn",
-    "description": "Наука, психология и саморазвитие"
-  }
-},
-{
-  "model": "catalog.genre",
-  "pk": 6,
-  "fields": {
-    "name": "Детские книги",
-    "slug": "detskie",
-    "description": "Истории для семейного чтения"
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 1,
-  "fields": {
-    "name": "Михаил Булгаков",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 2,
-  "fields": {
-    "name": "Фёдор Достоевский",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 3,
-  "fields": {
-    "name": "Лев Толстой",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 4,
-  "fields": {
-    "name": "Александр Пушкин",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 5,
-  "fields": {
-    "name": "Гузель Яхина",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 6,
-  "fields": {
-    "name": "Алексей Сальников",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 7,
-  "fields": {
-    "name": "Умберто Эко",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 8,
-  "fields": {
-    "name": "Аркадий и Борис Стругацкие",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 9,
-  "fields": {
-    "name": "Джордж Оруэлл",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 10,
-  "fields": {
-    "name": "Фрэнк Герберт",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 11,
-  "fields": {
-    "name": "Агата Кристи",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 12,
-  "fields": {
-    "name": "Артур Конан Дойл",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 13,
-  "fields": {
-    "name": "Стиг Ларссон",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 14,
-  "fields": {
-    "name": "Юваль Ной Харари",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 15,
-  "fields": {
-    "name": "Даниэль Канеман",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 16,
-  "fields": {
-    "name": "Стивен Хокинг",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 17,
-  "fields": {
-    "name": "Антуан де Сент-Экзюпери",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 18,
-  "fields": {
-    "name": "Виктор Драгунский",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 19,
-  "fields": {
-    "name": "Николай Носов",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 20,
-  "fields": {
-    "name": "Александр Волков",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 21,
-  "fields": {
-    "name": "Джеймс Клир",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 22,
-  "fields": {
-    "name": "Джон Р. Р. Толкин",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.author",
-  "pk": 23,
-  "fields": {
-    "name": "Евгений Водолазкин",
-    "about": ""
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 1,
-  "fields": {
-    "title": "Мастер и Маргарита",
-    "slug": "master-i-margarita",
-    "author": 1,
-    "genre": 1,
-    "description": "В Москву тридцатых годов приезжает загадочный профессор Воланд со своей свитой, и привычная жизнь столицы переворачивается.\nИстория любви Мастера и Маргариты переплетается с романом о Понтии Пилате. Одна из самых читаемых книг XX века, в которой сатира соседствует с философской притчей.",
-    "image": "books/master-i-margarita.webp",
-    "price": "319.00",
-    "old_price": "389.00",
-    "stock": 16,
-    "publisher": "АСТ",
-    "year": 2023,
-    "pages": 512,
-    "isbn": "978-5-17-149175-8",
-    "cover": "soft",
-    "age": "16+",
-    "is_new": false,
-    "is_bestseller": true,
-    "created": "2026-09-09T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 2,
-  "fields": {
-    "title": "Преступление и наказание",
-    "slug": "prestuplenie-i-nakazanie",
-    "author": 2,
-    "genre": 1,
-    "description": "Бывший студент Родион Раскольников решается на убийство, чтобы проверить собственную теорию о «праве сильного».\nРоман о том, что происходит с человеком после преступления: муки совести, страх и долгий путь к раскаянию.",
-    "image": "books/prestuplenie-i-nakazanie.webp",
-    "price": "349.00",
-    "old_price": "426.00",
-    "stock": 10,
-    "publisher": "АСТ",
-    "year": 2022,
-    "pages": 672,
-    "isbn": "978-5-17-090630-7",
-    "cover": "soft",
-    "age": "16+",
-    "is_new": false,
-    "is_bestseller": true,
-    "created": "2026-09-10T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 3,
-  "fields": {
-    "title": "Анна Каренина",
-    "slug": "anna-karenina",
-    "author": 3,
-    "genre": 1,
-    "description": "Замужняя петербургская дама влюбляется в блестящего офицера Вронского и идёт против правил высшего света.\nПараллельно развивается история Левина и Кити. Роман о семье, любви и цене, которую приходится платить за свободу.",
-    "image": "books/anna-karenina.webp",
-    "price": "369.00",
-    "old_price": "450.00",
-    "stock": 15,
-    "publisher": "АСТ",
-    "year": 2022,
-    "pages": 864,
-    "isbn": "978-5-17-087888-8",
-    "cover": "soft",
-    "age": "16+",
-    "is_new": false,
-    "is_bestseller": false,
-    "created": "2026-09-11T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 4,
-  "fields": {
-    "title": "Евгений Онегин",
-    "slug": "evgeniy-onegin",
-    "author": 4,
-    "genre": 1,
-    "description": "Роман в стихах о скучающем столичном дворянине, который отвергает любовь Татьяны Лариной и слишком поздно понимает свою ошибку.\nВ издание также вошли «Борис Годунов» и «Маленькие трагедии».",
-    "image": "books/evgeniy-onegin.webp",
-    "price": "309.00",
-    "old_price": "377.00",
-    "stock": 0,
-    "publisher": "Азбука",
-    "year": 2021,
-    "pages": 448,
-    "isbn": "978-5-389-08846-7",
-    "cover": "soft",
-    "age": "12+",
-    "is_new": false,
-    "is_bestseller": false,
-    "created": "2026-09-12T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 5,
-  "fields": {
-    "title": "Зулейха открывает глаза",
-    "slug": "zuleyha-otkryvaet-glaza",
-    "author": 5,
-    "genre": 2,
-    "description": "Зима 1930 года. Крестьянку Зулейху вместе с сотнями других переселенцев отправляют из татарской деревни в Сибирь.\nНа берегу Ангары ей предстоит выжить, вырастить сына и впервые почувствовать себя свободной.",
-    "image": "books/zuleyha-otkryvaet-glaza.webp",
-    "price": "1149.00",
-    "old_price": "1402.00",
-    "stock": 8,
-    "publisher": "АСТ",
-    "year": 2020,
-    "pages": 512,
-    "isbn": "978-5-17-090436-5",
-    "cover": "hard",
-    "age": "16+",
-    "is_new": false,
-    "is_bestseller": true,
-    "created": "2026-09-13T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 6,
-  "fields": {
-    "title": "Петровы в гриппе и вокруг него",
-    "slug": "petrovy-v-grippe",
-    "author": 6,
-    "genre": 2,
-    "description": "Автослесарь Петров, его жена-библиотекарь и сын болеют гриппом накануне Нового года. Чем выше температура, тем труднее отличить реальность от бреда.\nСмешной и странный роман о жизни обычной екатеринбургской семьи.",
-    "image": "books/petrovy-v-grippe.webp",
-    "price": "979.00",
-    "old_price": "1175.00",
-    "stock": 24,
-    "publisher": "АСТ",
-    "year": 2019,
-    "pages": 416,
-    "isbn": "978-5-17-106570-6",
-    "cover": "hard",
-    "age": "18+",
-    "is_new": false,
-    "is_bestseller": false,
-    "created": "2026-09-14T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 7,
-  "fields": {
-    "title": "Имя розы",
-    "slug": "imya-rozy",
-    "author": 7,
-    "genre": 2,
-    "description": "1327 год. В богатом итальянском аббатстве один за другим погибают монахи. Расследовать смерти берётся францисканец Вильгельм Баскервильский со своим учеником Адсоном.\nИсторический детектив, в котором следы ведут в огромную монастырскую библиотеку.",
-    "image": "books/imya-rozy.webp",
-    "price": "2399.00",
-    "old_price": "2927.00",
-    "stock": 2,
-    "publisher": "Corpus",
-    "year": 2022,
-    "pages": 672,
-    "isbn": "978-5-17-082694-0",
-    "cover": "hard",
-    "age": "16+",
-    "is_new": false,
-    "is_bestseller": false,
-    "created": "2026-09-15T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 8,
-  "fields": {
-    "title": "Пикник на обочине",
-    "slug": "piknik-na-obochine",
-    "author": 8,
-    "genre": 3,
-    "description": "После Посещения на Земле остались Зоны — места, где не работают привычные законы физики. Сталкеры тайком выносят оттуда опасные артефакты.\nИстория Рэдрика Шухарта, который идёт за Золотым шаром, исполняющим желания.",
-    "image": "books/piknik-na-obochine.webp",
-    "price": "399.00",
-    "old_price": "487.00",
-    "stock": 17,
-    "publisher": "АСТ",
-    "year": 2022,
-    "pages": 256,
-    "isbn": "978-5-17-088647-0",
-    "cover": "soft",
-    "age": "16+",
-    "is_new": false,
-    "is_bestseller": true,
-    "created": "2026-09-16T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 9,
-  "fields": {
-    "title": "1984",
-    "slug": "1984",
-    "author": 9,
-    "genre": 3,
-    "description": "Уинстон Смит работает в Министерстве правды и каждый день переписывает прошлое. Он живёт под постоянным наблюдением Большого Брата и всё же решается на собственные мысли.\nГлавная антиутопия XX века в новом переводе.",
-    "image": "books/1984.webp",
-    "price": "359.00",
-    "old_price": "438.00",
-    "stock": 24,
-    "publisher": "АСТ",
-    "year": 2023,
-    "pages": 320,
-    "isbn": "978-5-17-148844-4",
-    "cover": "soft",
-    "age": "16+",
-    "is_new": false,
-    "is_bestseller": true,
-    "created": "2026-09-17T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 10,
-  "fields": {
-    "title": "Дюна",
-    "slug": "dyuna",
-    "author": 10,
-    "genre": 3,
-    "description": "Пустынная планета Арракис — единственный источник пряности, самого ценного вещества во Вселенной. Юный Пол Атрейдес теряет дом и находит союзников среди фрименов.\nМасштабная сага о власти, экологии и вере.",
-    "image": "books/dyuna.webp",
-    "price": "579.00",
-    "old_price": "706.00",
-    "stock": 7,
-    "publisher": "АСТ",
-    "year": 2023,
-    "pages": 704,
-    "isbn": "978-5-17-151432-7",
-    "cover": "soft",
-    "age": "16+",
-    "is_new": false,
-    "is_bestseller": true,
-    "created": "2026-09-18T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 11,
-  "fields": {
-    "title": "Убийство в «Восточном экспрессе»",
-    "slug": "ubiystvo-v-vostochnom-ekspresse",
-    "author": 11,
-    "genre": 4,
-    "description": "Поезд застрял в снежных заносах, а в купе найден убитый пассажир. Преступник всё ещё в вагоне.\nЭркюлю Пуаро предстоит опросить двенадцать подозреваемых, у каждого из которых есть алиби.",
-    "image": "books/ubiystvo-v-vostochnom-ekspresse.webp",
-    "price": "479.00",
-    "old_price": "584.00",
-    "stock": 22,
-    "publisher": "Эксмо",
-    "year": 2026,
-    "pages": 320,
-    "isbn": "978-5-04-099247-8",
-    "cover": "soft",
-    "age": "16+",
-    "is_new": false,
-    "is_bestseller": true,
-    "created": "2026-09-19T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 12,
-  "fields": {
-    "title": "Собака Баскервилей",
-    "slug": "sobaka-baskerviley",
-    "author": 12,
-    "genre": 4,
-    "description": "Над родом Баскервилей висит старинное проклятие: на болотах Девоншира по ночам видят чудовищного пса.\nШерлок Холмс и доктор Ватсон выясняют, кто стоит за легендой и кому выгодна смерть наследника.",
-    "image": "books/sobaka-baskerviley.webp",
-    "price": "329.00",
-    "old_price": "395.00",
-    "stock": 5,
-    "publisher": "Эксмо",
-    "year": 2026,
-    "pages": 256,
-    "isbn": "978-5-04-248946-4",
-    "cover": "soft",
-    "age": "12+",
-    "is_new": false,
-    "is_bestseller": false,
-    "created": "2026-09-20T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 13,
-  "fields": {
-    "title": "Десять негритят",
-    "slug": "desyat-negrityat",
-    "author": 11,
-    "genre": 4,
-    "description": "Десять незнакомых людей получают приглашение на уединённый остров. Хозяин не появляется, а гости начинают погибать один за другим — в точности по детской считалке.\nСамый продаваемый детектив в истории.",
-    "image": "books/desyat-negrityat.webp",
-    "price": "499.00",
-    "old_price": "609.00",
-    "stock": 0,
-    "publisher": "Эксмо",
-    "year": 2026,
-    "pages": 288,
-    "isbn": "978-5-04-103497-9",
-    "cover": "soft",
-    "age": "16+",
-    "is_new": true,
-    "is_bestseller": false,
-    "created": "2026-09-21T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 14,
-  "fields": {
-    "title": "Девушка с татуировкой дракона",
-    "slug": "devushka-s-tatuirovkoy-drakona",
-    "author": 13,
-    "genre": 4,
-    "description": "Журналист Микаэль Блумквист расследует исчезновение девушки, которая пропала сорок лет назад. Ему помогает Лисбет Саландер — гениальный хакер с тяжёлым характером.\nПервый роман трилогии «Миллениум».",
-    "image": "books/devushka-s-tatuirovkoy-drakona.webp",
-    "price": "1099.00",
-    "old_price": null,
-    "stock": 2,
-    "publisher": "Эксмо",
-    "year": 2025,
-    "pages": 624,
-    "isbn": "978-5-04-173910-2",
-    "cover": "soft",
-    "age": "18+",
-    "is_new": false,
-    "is_bestseller": false,
-    "created": "2026-09-22T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 15,
-  "fields": {
-    "title": "Sapiens. Краткая история человечества",
-    "slug": "sapiens",
-    "author": 14,
-    "genre": 5,
-    "description": "Сто тысяч лет назад Homo sapiens был одним из нескольких видов людей. Как он подчинил себе планету?\nИсторик Юваль Харари рассказывает о трёх революциях — когнитивной, аграрной и научной — и о том, как они изменили наш мир.",
-    "image": "books/sapiens.webp",
-    "price": "1349.00",
-    "old_price": null,
-    "stock": 15,
-    "publisher": "Синдбад",
-    "year": 2023,
-    "pages": 512,
-    "isbn": "978-5-00131-372-4",
-    "cover": "hard",
-    "age": "16+",
-    "is_new": true,
-    "is_bestseller": false,
-    "created": "2026-09-23T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 16,
-  "fields": {
-    "title": "Думай медленно… решай быстро",
-    "slug": "dumay-medlenno-reshay-bystro",
-    "author": 15,
-    "genre": 5,
-    "description": "Нобелевский лауреат объясняет, почему мы принимаем нерациональные решения. В нашей голове работают две системы: быстрая интуитивная и медленная логическая.\nКнига учит замечать ловушки мышления и не доверять первому впечатлению.",
-    "image": "books/dumay-medlenno-reshay-bystro.webp",
-    "price": "1599.00",
-    "old_price": "1951.00",
-    "stock": 15,
-    "publisher": "АСТ",
-    "year": 2021,
-    "pages": 656,
-    "isbn": "978-5-17-080053-7",
-    "cover": "hard",
-    "age": "16+",
-    "is_new": false,
-    "is_bestseller": false,
-    "created": "2026-09-24T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 17,
-  "fields": {
-    "title": "Краткая история времени",
-    "slug": "kratkaya-istoriya-vremeni",
-    "author": 16,
-    "genre": 5,
-    "description": "Откуда взялась Вселенная и что её ждёт? Что такое чёрные дыры и куда течёт время?\nСтивен Хокинг рассказывает о самых сложных вопросах физики понятным языком и почти без формул.",
-    "image": "books/kratkaya-istoriya-vremeni.webp",
-    "price": "579.00",
-    "old_price": "706.00",
-    "stock": 2,
-    "publisher": "АСТ",
-    "year": 2023,
-    "pages": 272,
-    "isbn": "978-5-17-152860-7",
-    "cover": "soft",
-    "age": "12+",
-    "is_new": false,
-    "is_bestseller": false,
-    "created": "2026-09-25T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 18,
-  "fields": {
-    "title": "Маленький принц",
-    "slug": "malenkiy-princ",
-    "author": 17,
-    "genre": 6,
-    "description": "Лётчик терпит аварию в пустыне и встречает мальчика с далёкой планеты.\nСказка-притча о дружбе, любви и ответственности за тех, кого приручил. С рисунками автора.",
-    "image": "books/malenkiy-princ.webp",
-    "price": "389.00",
-    "old_price": "475.00",
-    "stock": 13,
-    "publisher": "Эксмо",
-    "year": 2026,
-    "pages": 112,
-    "isbn": "978-5-699-94326-5",
-    "cover": "hard",
-    "age": "6+",
-    "is_new": false,
-    "is_bestseller": true,
-    "created": "2026-09-26T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 19,
-  "fields": {
-    "title": "Денискины рассказы",
-    "slug": "deniskiny-rasskazy",
-    "author": 18,
-    "genre": 6,
-    "description": "Весёлые истории о Дениске Кораблёве и его друге Мишке: про манную кашу за окном, про тайное, которое становится явным, и про многое другое.\nКнига входит в список внеклассного чтения.",
-    "image": "books/deniskiny-rasskazy.webp",
-    "price": "319.00",
-    "old_price": "389.00",
-    "stock": 2,
-    "publisher": "Эксмо",
-    "year": 2026,
-    "pages": 160,
-    "isbn": "978-5-04-166674-3",
-    "cover": "hard",
-    "age": "6+",
-    "is_new": false,
-    "is_bestseller": false,
-    "created": "2026-09-27T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 20,
-  "fields": {
-    "title": "Приключения Незнайки и его друзей",
-    "slug": "priklyucheniya-neznayki",
-    "author": 19,
-    "genre": 6,
-    "description": "В Цветочном городе живут коротышки, и самый известный из них — Незнайка. Он берётся за всё подряд и постоянно попадает в смешные истории.\nА потом вместе с друзьями отправляется в путешествие на воздушном шаре.",
-    "image": "books/priklyucheniya-neznayki.webp",
-    "price": "729.00",
-    "old_price": "889.00",
-    "stock": 24,
-    "publisher": "Махаон",
-    "year": 2026,
-    "pages": 208,
-    "isbn": "978-5-389-25601-9",
-    "cover": "soft",
-    "age": "6+",
-    "is_new": false,
-    "is_bestseller": false,
-    "created": "2026-09-28T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 21,
-  "fields": {
-    "title": "Волшебник Изумрудного города",
-    "slug": "volshebnik-izumrudnogo-goroda",
-    "author": 20,
-    "genre": 6,
-    "description": "Ураган уносит домик с девочкой Элли и пёсиком Тотошкой в Волшебную страну. Чтобы вернуться домой, нужно дойти до Изумрудного города по дороге из жёлтого кирпича.\nВ пути Элли находит друзей: Страшилу, Железного Дровосека и Трусливого Льва.",
-    "image": "books/volshebnik-izumrudnogo-goroda.webp",
-    "price": "749.00",
-    "old_price": "914.00",
-    "stock": 15,
-    "publisher": "АСТ",
-    "year": 2024,
-    "pages": 224,
-    "isbn": "978-5-17-162242-8",
-    "cover": "hard",
-    "age": "6+",
-    "is_new": true,
-    "is_bestseller": false,
-    "created": "2026-09-29T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 22,
-  "fields": {
-    "title": "Атомные привычки",
-    "slug": "atomnye-privychki",
-    "author": 21,
-    "genre": 5,
-    "description": "Большие перемены складываются из маленьких шагов. Джеймс Клир показывает, как улучшаться на один процент каждый день.\nПростая система из четырёх правил помогает закрепить полезные привычки и избавиться от вредных.",
-    "image": "books/atomnye-privychki.webp",
-    "price": "649.00",
-    "old_price": "779.00",
-    "stock": 7,
-    "publisher": "Питер",
-    "year": 2026,
-    "pages": 304,
-    "isbn": "978-5-4461-4117-3",
-    "cover": "soft",
-    "age": "16+",
-    "is_new": true,
-    "is_bestseller": true,
-    "created": "2026-09-30T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 23,
-  "fields": {
-    "title": "Хоббит",
-    "slug": "hobbit",
-    "author": 22,
-    "genre": 3,
-    "description": "Хоббит Бильбо Бэггинс любит уют и вкусный завтрак, но однажды на пороге появляются волшебник Гэндальф и тринадцать гномов.\nВпереди дорога к Одинокой горе, дракон Смауг и находка, которая изменит судьбу Средиземья. Перевод Н. Рахмановой.",
-    "image": "books/hobbit.webp",
-    "price": "999.00",
-    "old_price": "1219.00",
-    "stock": 2,
-    "publisher": "АСТ",
-    "year": 2022,
-    "pages": 320,
-    "isbn": "978-5-17-145371-8",
-    "cover": "hard",
-    "age": "12+",
-    "is_new": true,
-    "is_bestseller": false,
-    "created": "2026-10-01T22:27:41.417Z"
-  }
-},
-{
-  "model": "catalog.book",
-  "pk": 24,
-  "fields": {
-    "title": "Авиатор",
-    "slug": "aviator",
-    "author": 23,
-    "genre": 2,
-    "description": "Герой просыпается в больничной палате и не помнит о себе ничего. По совету врача он начинает записывать обрывки воспоминаний: Петербург начала века, дача, первая любовь, Соловки.\nРоман о памяти, вине и о том, из чего на самом деле состоит история.",
-    "image": "books/aviator.webp",
-    "price": "1449.00",
-    "old_price": "1768.00",
-    "stock": 5,
-    "publisher": "АСТ",
-    "year": 2021,
-    "pages": 416,
-    "isbn": "978-5-17-096655-4",
-    "cover": "hard",
-    "age": "16+",
-    "is_new": true,
-    "is_bestseller": false,
-    "created": "2026-10-02T22:27:41.417Z"
-  }
-}
 ]

@@ -1,5 +1,5 @@
-<label class="form__field">
-    <span class="form__label">{{ field.label }}</span>
+<label class="form__field {% if field.errors %}form__field_error{% endif %}">
+    <span class="form__label">{{ field.label }}{% if field.field.required %} <span class="form__star">*</span>{% endif %}</span>
     {{ field }}
     {% for error in field.errors %}
         <span class="form__error">{{ error }}</span>

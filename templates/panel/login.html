@@ -1,22 +1,22 @@
 {% extends 'base.html' %}
 
-{% block title %}Вход — КнигоСвет{% endblock %}
+{% block title %}Вход для библиотекаря — КнигоСвет{% endblock %}
 
 {% block content %}
 <section class="section section_top auth">
     <div class="container auth__inner">
-        <form class="form auth__form" method="post">
+        <form class="form auth__form" method="post" novalidate>
             {% csrf_token %}
-            <span class="section__label">Личный кабинет</span>
+            <span class="section__label">Раздел библиотекаря</span>
             <h1 class="form__title">Вход</h1>
             {% for error in form.non_field_errors %}
-                <span class="form__error">{{ error }}</span>
+                <span class="form__error form__error_block">{{ error }}</span>
             {% endfor %}
             {% include 'includes/field.html' with field=form.username %}
             {% include 'includes/field.html' with field=form.password %}
             <input type="hidden" name="next" value="{{ next }}">
             <button class="button button_wide" type="submit">Войти</button>
-            <p class="form__hint">Ещё нет аккаунта? <a class="form__link" href="{% url 'register' %}">Зарегистрироваться</a></p>
+            <p class="form__hint">Раздел доступен только сотрудникам библиотеки.</p>
         </form>
     </div>
 </section>

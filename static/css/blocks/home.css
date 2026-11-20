@@ -1,0 +1,149 @@
+.hero__search {
+    display: flex;
+    gap: 10px;
+    max-width: 520px;
+    margin-bottom: 28px;
+}
+
+.hero__input {
+    flex: 1;
+    padding: 14px 16px;
+    font-size: 15px;
+}
+
+.hero__search .button svg {
+    width: 18px;
+    height: 18px;
+}
+
+.hero__stats {
+    display: flex;
+    gap: 32px;
+}
+
+.hero__stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero__number {
+    font-family: var(--font-title);
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.1;
+}
+
+.hero__caption {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.section_surface {
+    background: var(--surface);
+}
+
+.section__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.genres__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.genres__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 24px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.genres__item:hover {
+    border-color: var(--gold);
+    box-shadow: var(--shadow);
+}
+
+.genres__name {
+    font-family: var(--font-title);
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.genres__count {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.rules__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.rules__item {
+    padding: 28px;
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 20px;
+}
+
+.rules__number {
+    font-family: var(--font-title);
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--gold);
+}
+
+.rules__title {
+    margin: 10px 0 8px;
+    font-size: 18px;
+}
+
+.rules__text {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+@media (max-width: 900px) {
+    .genres__grid,
+    .rules__list {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .hero__stats {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .genres__grid,
+    .rules__list {
+        grid-template-columns: 1fr;
+    }
+
+    .hero__search {
+        flex-direction: column;
+    }
+
+    .hero__number {
+        font-size: 24px;
+    }
+
+    .section__head {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
